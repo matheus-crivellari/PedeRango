@@ -71,7 +71,9 @@ if($resultado){
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="table-responsive">
+                <a class="btn btn-primary" href="usuario_inserir.php" role="button">Adicionar usuário</a>
+
+                <div class="table-responsive mt-3">
                     <table class="table">
                         <thead>
                             <th>#</th>
@@ -109,7 +111,7 @@ if($resultado){
                                         ?>
                                     </td>
                                     <td>
-                                        <a href="usuarios_editar.php?id=<?= $usuario->codigo_usuario ?>" class="btn btn-primary">Editar</a>
+                                        <a href="usuarios_alterar.php?id=<?= $usuario->codigo_usuario ?>" class="btn btn-primary">Editar</a>
                                         <a href="usuarios_excluir.php?id=<?= $usuario->codigo_usuario ?>" class="btn btn-danger">Excluir</a>
                                     </td>
                             </tr>
