@@ -8,15 +8,18 @@ create table usuarios_tb(
 
     username varchar(20) not null,
     nome_completo text not null,
+    endereco text not null,
+    estado_cod int(10),
+    cidade_cod int(10),
     senha varchar(8) not null,
     tipo enum('adm', 'com', 'ent') -- administrador, comum, entregador
 );
 
-insert into usuarios_tb values (0, 'admin', 'Administrador Usuário', '123', 'adm');
-insert into usuarios_tb values (0, 'comum', 'Usuário Comum', '123', 'com');
-insert into usuarios_tb values (0, 'entregador', 'Usuário Entregador', '123', 'ent');
+insert into usuarios_tb values (0, 'admin', 'Administrador Usuário',   'Rua Nome da Rua, 999 - Bairro', 1, 1, '123', 'adm');
+insert into usuarios_tb values (0, 'comum', 'Usuário Comum',           'Rua Nome da Rua, 999 - Bairro', 1, 1, '123', 'com');
+insert into usuarios_tb values (0, 'entregador', 'Usuário Entregador', 'Rua Nome da Rua, 999 - Bairro', 1, 1, '123', 'ent');
 
--- Tabela pedidos
+-- Tabela produtos
 create table produtos_tb(
     codigo_produto int(10) not null primary key auto_increment,
 
@@ -39,7 +42,7 @@ create table pedidos_tb(
     foreign key(cod_usuario) references usuarios_tb(codigo_usuario)
 );
 
--- Tabela pedidos produtos
+-- Tabela pedidos/produtos
 create table produtos_pedidos(
     id int(10) not null primary key auto_increment,
     cod_pedido int(10) not null,
@@ -49,4 +52,17 @@ create table produtos_pedidos(
 
     foreign key(cod_pedido) references pedidos_tb(id_pedido),
     foreign key(cod_produto) references produtos_tb(codigo_produto)
+);
+
+-- Tabela estado
+create table tb_estado(
+    id int(10) not null primary key auto_increment,
+    nome varchar(64)
+);
+
+-- Tabela cidade
+create table tb_cidade(
+    id int(10) not null primary key auto_increment,
+    estado_cod int(10),
+    nome varchar(64)
 );

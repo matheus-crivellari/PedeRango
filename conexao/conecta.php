@@ -11,3 +11,5 @@ if(mysqli_errno($conexao)){
 // Permite conexões ajax de qualquer origem
 // Essencial para o webservice do app mobile
 header('Access-Control-Allow-Origin: *');
+
+?>

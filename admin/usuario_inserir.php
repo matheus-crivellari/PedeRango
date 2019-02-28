@@ -1,3 +1,31 @@
+<?php
+// Inclui a conexao
+require_once '../conexao/conecta.php';
+
+// Incializa a sessao
+if(!isset($_SESSION)) session_start();
+
+// Obtem os dados do form
+$nome           = $_POST['nome']          ?? '';
+$nome_completo  = $_POST['nome_completo'] ?? '';
+$endereco       = $_POST['endereco']      ?? '';
+$estado         = $_POST['estado']        ?? '';
+$cidade         = $_POST['cidade']        ?? '';
+$senha          = $_POST['senha']         ?? '';
+$tipo           = $_POST['tipo']          ?? '';
+
+// Valida as vars do form
+if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo){
+    $sql = "INSERT INTO usuarios_tb VALUES (0,'$nome','$nome_completo','$endereco',$estado,$cidade,'$senha','$tipo')";
+
+    $resultado = mysqli_query($conexao, $sql);
+
+    if($resultado){
+        $_SESSION['msg'] = 'Usuário cadastrado com sucesso.';
+        header('Location: usuarios_listar.php');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -69,6 +97,30 @@
                                 <input class="form-control" type="text" name="nome_completo" id="campoNomeCompleto" placeholder="Digite o nome completo">
                             </div>
 
+                            <!-- Campo endereço -->
+                            <div class="form-group">
+                                <label for="campoEndereco">Endereço</label>
+                                <input class="form-control" type="text" name="endereco" id="campoEndereco" placeholder="Rua Nome da Rua, 999 - Bairro">
+                            </div>
+
+                            <!-- Estado / Cidade -->
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-6">
+                                        <label for="campoEstado">Estado</label>
+                                        <select class="form-control" name="estado" id="campoEstado">
+                                            <option value="1">São Paulo</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="campoCidade">Cidade</label>
+                                        <select class="form-control" name="cidade" id="campoCidade">
+                                            <option value="1">Piracicaba</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Campo senha -->
                             <div class="form-group">
                                 <label for="campoSenha">Senha</label>
@@ -85,6 +137,8 @@
                                     <option value="adm">Administrador</option>
                                 </select>
                             </div>
+
+                            <!-- Enviar / Cancelar -->
                             <div class="form-row">
                                 <div class="col-6">
                                     <input type="submit" class="btn btn-block btn-primary " value="Salvar">

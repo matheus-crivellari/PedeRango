@@ -1,9 +1,9 @@
 <?php
+// Inclui a conexao
 require_once '../conexao/conecta.php';
 
-if(!isset($_SESSION)){
-    session_start();
-}
+// Incializa a sessao
+if(!isset($_SESSION)) session_start();
 
 $resultado = mysqli_query($conexao, 'SELECT * FROM usuarios_tb');
 if($resultado){
@@ -71,6 +71,11 @@ if($resultado){
         </div>
         <div class="row">
             <div class="col-12">
+                <?php if(isset($_SESSION['msg'])): ?>
+                    <div class="alert alert-success" role="alert"><?= $_SESSION['msg'] ?></div>
+                    <?php unset($_SESSION['msg']); ?>
+                <?php endif;?>
+
                 <a class="btn btn-primary" href="usuario_inserir.php" role="button">Adicionar usuário</a>
 
                 <div class="table-responsive mt-3">
