@@ -89,7 +89,7 @@ if($resultado){
                     <?php unset($_SESSION['erro']); ?>
                 <?php endif;?>
 
-                <a class="btn btn-primary" href="usuario_inserir.php" role="button">Adicionar usuário</a>
+                <a class="btn btn-primary" href="usuario_inserir.php" role="button">Novo usuário</a>
 
                 <div class="table-responsive mt-3">
                     <table class="table">

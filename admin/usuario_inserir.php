@@ -79,7 +79,7 @@ if($resultado){
 
                 <div class="row">
                     <div class="col-8 offset-2">
-                        <h1>Cadastro de usuário</h1>
+                        <h1>Criar usuário</h1>
                         <hr>
                         <?php if(isset($_SESSION['msg'])): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -127,7 +127,7 @@ if($resultado){
                                         <label for="campoEstado">Estado</label>
                                         <select class="form-control" name="estado" id="campoEstado">
                                             <?php foreach ($estados as $estado): ?>
-                                                <option value="<?php print $estado['id']?>"><?php print $estado['nome']?></option>
+                                                <option value="<?php print $estado['id']?>"><?php print $estado['uf']?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
