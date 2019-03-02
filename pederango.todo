@@ -1,0 +1,23 @@
+TO-DO:
+  Backend:
+    ✔ CRUD: Usuários, Inserir; @done (19-03-02 20:00)
+    ✔ CRUD: Usuários, Alterar; @done (19-03-02 20:00)
+    ✔ CRUD: Usuários, Listar; @done (19-03-02 20:00)
+    ✔ CRUD: Usuários, Excluir; @done (19-03-02 20:00)
+    ☐ Verificação de username repetido;
+    ☐ Autenticação;
+    ☐ CRUD: Produtos, Inserir;
+    ☐ CRUD: Produtos, Alterar;
+    ☐ CRUD: Produtos, Listar;
+    ☐ CRUD: Produtos, Excluir;
+    ☐ CRUD: Pedidos, Inserir;
+    ☐ CRUD: Pedidos, Alterar;
+    ☐ CRUD: Pedidos, Listar;
+    ☐ CRUD: Pedidos, Excluir;
+  Frontend:
+    ☐ Auto-cadastro de usuário;
+    ☐ Autenticação;
+    ☐ Lista de produtos;
+    ☐ Criação de pedido;
+    ☐ ENTREGADOR: Listagem de pedidos;
+    ☐ ENTREGADOR: Entrega do pedido;
