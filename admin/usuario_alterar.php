@@ -2,28 +2,41 @@
 // Inclui a conexao
 require_once '../conexao/conecta.php';
 
-// Obtem os dados do form
-$nome           = $_POST['nome']          ?? '';
-$nome_completo  = $_POST['nome_completo'] ?? '';
-$endereco       = $_POST['endereco']      ?? '';
-$estado         = $_POST['estado']        ?? '';
-$cidade         = $_POST['cidade']        ?? '';
-$senha          = $_POST['senha']         ?? '';
-$tipo           = $_POST['tipo']          ?? '';
+// Se estiver definido o $_POST['id'], entao o usuario enviou o form de alterar
+// altera o usuario no banco
+if(isset($_POST['id'])){
+    // Obtem os dados do form
+    $id             = $_POST['id']            ?? 0;
+    $nome           = $_POST['nome']          ?? '';
+    $nome_completo  = $_POST['nome_completo'] ?? '';
+    $endereco       = $_POST['endereco']      ?? '';
+    $estado         = $_POST['estado']        ?? '';
+    $cidade         = $_POST['cidade']        ?? '';
+    $senha          = $_POST['senha']         ?? '';
+    $tipo           = $_POST['tipo']          ?? '';
 
-// Valida as vars do form
-if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo){
-    $sql = "INSERT INTO usuarios_tb VALUES (0,'$nome','$nome_completo','$endereco',$estado,$cidade,'$senha','$tipo')";
+    $sql = "UPDATE usuarios_tb SET username='$nome',nome_completo='$nome_completo',endereco='$endereco',estado_cod=$estado,cidade_cod=$cidade,senha='$senha',tipo='$tipo' WHERE codigo_usuario=$id";
 
     $resultado = mysqli_query($conexao, $sql);
 
     if($resultado){
-        $_SESSION['msg'] = 'Usuário cadastrado com sucesso.';
-        header('Location: usuario_listar.php');
-        exit(); // Necessario pq nossa página contem conteudo html além do header
+        $_SESSION['msg'] = 'Usuário alterado com sucesso.';
     }else{
         $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
     }
+}
+
+// Se estiver definido o $_GET['id'], obtem os dados do usuario para alterar
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $resultado = mysqli_query($conexao, "SELECT * FROM usuarios_tb WHERE codigo_usuario=$id");
+
+    if($resultado){
+        $usuario = mysqli_fetch_assoc($resultado);
+    }
+
+}else{
+    header('Location: usuario_listar.php');
 }
 ?>
 <!DOCTYPE html>
@@ -71,7 +84,7 @@ if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo
 
                 <div class="row">
                     <div class="col-8 offset-2">
-                        <h1>Cadastro de usuário</h1>
+                        <h1>Alteração de usuário</h1>
                         <hr>
                         <?php if(isset($_SESSION['msg'])): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -93,23 +106,26 @@ if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo
                             <?php unset($_SESSION['erro']); ?>
                         <?php endif;?>
                         <form method="post">
+                            <!-- Campo id -->
+                            <input type="hidden" name="id" value="<?= $id ?>">
+
                             <!-- Campo username -->
                             <div class="form-group">
                                 <label for="campoUsername">Username</label>
-                                <input class="form-control" type="text" name="nome" id="campoUsername" placeholder="Digite um login para o usuário">
+                                <input value="<?= $usuario['username'] ?>" class="form-control" type="text" name="nome" id="campoUsername" placeholder="Digite um login para o usuário">
                                 <small>O login do usuário deve ser único.</small>
                             </div>
 
                             <!-- Campo nome completo -->
                             <div class="form-group">
                                 <label for="campoNomeCompleto">Nome completo</label>
-                                <input class="form-control" type="text" name="nome_completo" id="campoNomeCompleto" placeholder="Digite o nome completo">
+                                <input value="<?= $usuario['nome_completo'] ?>" class="form-control" type="text" name="nome_completo" id="campoNomeCompleto" placeholder="Digite o nome completo">
                             </div>
 
                             <!-- Campo endereço -->
                             <div class="form-group">
                                 <label for="campoEndereco">Endereço</label>
-                                <input class="form-control" type="text" name="endereco" id="campoEndereco" placeholder="Rua Nome da Rua, 999 - Bairro">
+                                <input value="<?= $usuario['endereco'] ?>" class="form-control" type="text" name="endereco" id="campoEndereco" placeholder="Rua Nome da Rua, 999 - Bairro">
                             </div>
 
                             <!-- Estado / Cidade -->
@@ -133,7 +149,7 @@ if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo
                             <!-- Campo senha -->
                             <div class="form-group">
                                 <label for="campoSenha">Senha</label>
-                                <input class="form-control" type="text" name="senha" id="campoSenha" placeholder="Digite a senha do usuário">
+                                <input value="<?= $usuario['senha'] ?>" class="form-control" type="text" name="senha" id="campoSenha" placeholder="Digite a senha do usuário">
                                 <small>Até 8 dígitos.</small>
                             </div>
 

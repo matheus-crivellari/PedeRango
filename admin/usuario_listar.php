@@ -2,9 +2,6 @@
 // Inclui a conexao
 require_once '../conexao/conecta.php';
 
-// Incializa a sessao
-if(!isset($_SESSION)) session_start();
-
 $resultado = mysqli_query($conexao, 'SELECT * FROM usuarios_tb');
 if($resultado){
     $total          = mysqli_num_rows($resultado);
@@ -28,23 +25,31 @@ if($resultado){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Usuários</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <style>
-        html, body {
+        html,
+        body {
             background-color: #dadada;
             height: 100%;
         }
 
-        #principal{
+        #principal {
             background-color: white;
             height: 100%;
         }
 
-        .pag{
+        .pag {
             pointer-events: none;
             user-select: none;
         }
@@ -72,8 +77,23 @@ if($resultado){
         <div class="row">
             <div class="col-12">
                 <?php if(isset($_SESSION['msg'])): ?>
-                    <div class="alert alert-success" role="alert"><?= $_SESSION['msg'] ?></div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php print $_SESSION['msg']; ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <?php unset($_SESSION['msg']); ?>
+                <?php endif;?>
+
+                <?php if(isset($_SESSION['erro'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?php print $_SESSION['erro']; ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <?php unset($_SESSION['erro']); ?>
                 <?php endif;?>
 
                 <a class="btn btn-primary" href="usuario_inserir.php" role="button">Adicionar usuário</a>
@@ -91,11 +111,11 @@ if($resultado){
                             <?php foreach($usuarios as $usuario): ?>
                             <?php $usuario = (object) $usuario; ?>
                             <tr>
-                                    <td><?= $usuario->codigo_usuario ?></td>
-                                    <td><?= $usuario->username ?></td>
-                                    <td><?= $usuario->nome_completo ?></td>
-                                    <td>
-                                        <?php
+                                <td><?php print $usuario->codigo_usuario ?></td>
+                                <td><?php print $usuario->username ?></td>
+                                <td><?php print $usuario->nome_completo ?></td>
+                                <td>
+                                    <?php
                                             switch ($usuario->tipo) {
                                                 case 'adm':
                                                     echo 'Administrador';
@@ -114,11 +134,11 @@ if($resultado){
                                                     break;
                                             }
                                         ?>
-                                    </td>
-                                    <td>
-                                        <a href="usuarios_alterar.php?id=<?= $usuario->codigo_usuario ?>" class="btn btn-primary">Editar</a>
-                                        <a href="usuarios_excluir.php?id=<?= $usuario->codigo_usuario ?>" class="btn btn-danger">Excluir</a>
-                                    </td>
+                                </td>
+                                <td>
+                                    <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary">Editar</a>
+                                    <a onclick="return excluir('<?php print $usuario->nome_completo ?>')" href="usuario_excluir.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-danger">Excluir</a>
+                                </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -129,15 +149,16 @@ if($resultado){
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <?php if($pagina_atual > 1): ?>
-                                <li class="page-item"><a class="page-link" href="?pag=<?= $pagina_atual - 1?>">Anterior</a></li>
+                            <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_atual - 1; ?>">Anterior</a></li>
                             <?php endif;?>
 
                             <?php if($pagina_total > 1): ?>
-                                <li class="page-item"><a class="pag page-link text-muted"><?= str_pad($pagina_atual, 3, '0', STR_PAD_LEFT) . '/' . str_pad($pagina_total, 3, '0', STR_PAD_LEFT) ?></a></li>
+                            <li class="page-item"><a class="pag page-link text-muted"><?php print str_pad($pagina_atual, 3, '0', STR_PAD_LEFT) . '/' . str_pad($pagina_total, 3, '0', STR_PAD_LEFT);  ?></a>
+                            </li>
                             <?php endif;?>
 
                             <?php if($pagina_atual < $pagina_total): ?>
-                                <li class="page-item"><a class="page-link" href="?pag=<?= $pagina_atual + 1?>">Próximo</a></li>
+                            <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_atual + 1; ?>">Próximo</a></li>
                             <?php endif;?>
                         </ul>
                     </nav>
@@ -145,6 +166,15 @@ if($resultado){
             </div>
         </div>
     </div>
+    <script>
+        function excluir(nome) {
+            if (confirm('Tem certeza que deseja excluir "' + nome + '"?')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </body>
 
 </html>

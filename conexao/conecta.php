@@ -1,4 +1,6 @@
 <?php
+// Incializa a sessao
+if(!isset($_SESSION)) session_start();
 
 // Cria a conexao com o banco
 $conexao = mysqli_connect('localhost','root','','rango');

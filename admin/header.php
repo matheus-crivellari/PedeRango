@@ -7,16 +7,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="usuarios_listar.php">Usuários</a>
+        <a class="nav-link" href="usuario_listar.php">Usuários</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="produtos_listar.php">Produtos</a>
+        <a class="nav-link" href="produto_listar.php">Produtos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pedidos_listar.php">Pedidos</a>
+        <a class="nav-link" href="pedido_listar.php">Pedidos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pedidos_listar.php">Sair</a>
+        <a class="nav-link" href="pedido_listar.php">Sair</a>
       </li>
     </ul>
   </div>
