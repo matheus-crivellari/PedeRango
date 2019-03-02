@@ -15,9 +15,9 @@ create table usuarios_tb(
     tipo enum('adm', 'com', 'ent') -- administrador, comum, entregador
 );
 
-insert into usuarios_tb values (0, 'admin', 'Administrador Usuário',   'Rua Nome da Rua, 999 - Bairro', 1, 1, '123', 'adm');
-insert into usuarios_tb values (0, 'comum', 'Usuário Comum',           'Rua Nome da Rua, 999 - Bairro', 26, 1, '123', 'com');
-insert into usuarios_tb values (0, 'entregador', 'Usuário Entregador', 'Rua Nome da Rua, 999 - Bairro', 26, 1, '123', 'ent');
+insert into usuarios_tb values (0, 'admin', 'Administrador Usuário',   'Rua Nome da Rua, 999 - Bairro', 1, 80,      '123', 'adm');
+insert into usuarios_tb values (0, 'comum', 'Usuário Comum',           'Rua Nome da Rua, 999 - Bairro', 26, 5141,   '123', 'com');
+insert into usuarios_tb values (0, 'entregador', 'Usuário Entregador', 'Rua Nome da Rua, 999 - Bairro', 26, 4724,   '123', 'ent');
 
 -- Tabela produtos
 create table produtos_tb(
