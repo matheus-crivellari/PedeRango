@@ -194,27 +194,31 @@ if($resultado){
                 url: url,
                 data : dados
             }).done(function (resposta) {
-                if(resposta != 'erro'){
+                if(resposta != 'erro'){ // Se nao houver erro continua
                     if(resposta.length){
                         cpCidade.html(''); // Esvazia o select de cidades
 
+                        // Percorre o array de cidades obtido por ajax
+                        // e coloca no select de cidades
                         resposta.map(function (cidade) {
                             cpCidade.append('<option value="' + cidade.id + '">' + cidade.nome + '</option>');
                         });
 
                         cpCidade.prop('disabled', false); // Habilita o select de cidades
                     }
-                }else{
+                }else{ // se houver erro, interrompe e manda de volta para pagina anterior
                     alert('Houve um erro! Por favor tente novamnete mais tarde.');
                     window.history.back();
                 }
-            }).fail(function () {
+            }).fail(function () { // se houver erro, interrompe e manda de volta para pagina anterior
                 alert('Houve um erro! Por favor tente novamnete mais tarde.');
                 window.history.back();
             });
 
         }
 
+        // Chama a funcao pela primeira vez pra carregar as
+        // cidades do primeiro estado selecionado
         mudaEstado();
     </script>
 </body>
