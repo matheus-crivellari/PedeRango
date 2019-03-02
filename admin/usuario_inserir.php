@@ -20,10 +20,18 @@ if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo
     if($resultado){
         $_SESSION['msg'] = 'Usuário cadastrado com sucesso.';
         header('Location: usuario_listar.php');
-        exit(); // Necessario pq nossa página contem conteudo html além do header
+        exit; // Necessario pq nossa página contem conteudo html além do header
     }else{
         $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
     }
+}
+
+// Traz lista de estados
+$resultado = mysqli_query($conexao, "SELECT * FROM tb_estado");
+if($resultado){
+    $estados = mysqli_fetch_all($resultado, MYSQLI_ASSOC); // Transforma o resultado do banco numa lista de estados
+}else{
+    $estados = []; // Cria uma lista vazia caso não haja estados cadastrados
 }
 ?>
 <!DOCTYPE html>
@@ -118,7 +126,9 @@ if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo
                                     <div class="col-6">
                                         <label for="campoEstado">Estado</label>
                                         <select class="form-control" name="estado" id="campoEstado">
-                                            <option value="1">São Paulo</option>
+                                            <?php foreach ($estados as $estado): ?>
+                                                <option value="<?php print $estado['id']?>"><?php print $estado['nome']?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="col-6">

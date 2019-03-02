@@ -38,6 +38,14 @@ if(isset($_GET['id'])){
 }else{
     header('Location: usuario_listar.php');
 }
+
+// Traz lista de estados
+$resultado = mysqli_query($conexao, "SELECT * FROM tb_estado");
+if($resultado){
+    $estados = mysqli_fetch_all($resultado, MYSQLI_ASSOC); // Transforma o resultado do banco numa lista de estados
+}else{
+    $estados = []; // Cria uma lista vazia caso não haja estados cadastrados
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -134,7 +142,13 @@ if(isset($_GET['id'])){
                                     <div class="col-6">
                                         <label for="campoEstado">Estado</label>
                                         <select class="form-control" name="estado" id="campoEstado">
-                                            <option value="1">São Paulo</option>
+                                            <?php foreach ($estados as $estado): ?>
+                                                <?php if($usuario['estado_cod'] == $estado['id']):?>
+                                                    <option value="<?php print $estado['id']?>" selected><?php print $estado['nome']?></option>
+                                                <?php else: ?>
+                                                    <option value="<?php print $estado['id']?>"><?php print $estado['nome']?></option>
+                                                <?php endif;?>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="col-6">
