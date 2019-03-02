@@ -149,6 +149,7 @@ if($resultado){
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <?php if($pagina_atual > 1): ?>
+                            <li class="page-item"><a class="page-link" href="?pag=1">Primeira</a></li>
                             <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_atual - 1; ?>">Anterior</a></li>
                             <?php endif;?>
 
@@ -159,6 +160,7 @@ if($resultado){
 
                             <?php if($pagina_atual < $pagina_total): ?>
                             <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_atual + 1; ?>">Próximo</a></li>
+                            <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_total; ?>">Última</a></li>
                             <?php endif;?>
                         </ul>
                     </nav>
