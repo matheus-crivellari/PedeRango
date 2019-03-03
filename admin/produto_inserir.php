@@ -12,7 +12,7 @@ $imagem_prod     = $_FILES['imagem_prod'] ?? null;
 
 // Se existir imagem
 if($imagem_prod){
-    if($imagem_prod['name']){
+    if($imagem_prod['name']){ // Se existir nome da imagem
         $tipo = explode('/',$imagem_prod['type'])[1]; // Obtem o tipo do arquivo
         $nome = md5(time()) . ".$tipo"; // Cria um novo nome para evitar sobreescrever arquvios com nomes iguais
         $novo = '../upload/' . $nome; // Caminho completo

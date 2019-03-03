@@ -18,7 +18,7 @@ if(isset($_POST['id'])){
 
     // Se existir imagem
     if($imagem_nova){
-        if($imagem_nova['name']){
+        if($imagem_nova['name']){ // Se existir nome da imagem
             $tipo = explode('/',$imagem_nova['type'])[1]; // Obtem o tipo do arquivo
             $imagem_prod = md5(time()) . ".$tipo"; // Cria um novo nome para evitar sobreescrever arquvios com nomes iguais
             $novo = '../upload/' . $imagem_prod; // Caminho completo
