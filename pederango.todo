@@ -1,23 +1,21 @@
 TO-DO:
   Backend:
-    ✔ CRUD: Usuários, Inserir; @done (19-03-02 20:00)
-    ✔ CRUD: Usuários, Alterar; @done (19-03-02 20:00)
-    ✔ CRUD: Usuários, Listar; @done (19-03-02 20:00)
-    ✔ CRUD: Usuários, Excluir; @done (19-03-02 20:00)
-    ✔ Verificação de username repetido; @done (19-03-03 12:36)
     ☐ Autenticação;
-    ✔ CRUD: Produtos, Inserir; @done (19-03-03 14:49)
-    ✔ CRUD: Produtos, Alterar; @done (19-03-03 15:31)
-    ✔ CRUD: Produtos, Listar; @done (19-03-03 14:31)
-    ✔ CRUD: Produtos, Excluir; @done (19-03-03 14:31)
-    ☐ CRUD: Pedidos, Inserir;
-    ☐ CRUD: Pedidos, Alterar;
     ☐ CRUD: Pedidos, Listar;
-    ☐ CRUD: Pedidos, Excluir;
+    ✔ CRUD: Produtos, Alterar; @done (19-03-03 15:31)
+    ✔ CRUD: Produtos, Excluir; @done (19-03-03 14:31)
+    ✔ CRUD: Produtos, Inserir; @done (19-03-03 14:49)
+    ✔ CRUD: Produtos, Listar; @done (19-03-03 14:31)
+    ✔ CRUD: Usuários, Alterar; @done (19-03-02 20:00)
+    ✔ CRUD: Usuários, Excluir; @done (19-03-02 20:00)
+    ✔ CRUD: Usuários, Inserir; @done (19-03-02 20:00)
+    ✔ CRUD: Usuários, Listar; @done (19-03-02 20:00)
+    ✔ Verificação de username repetido; @done (19-03-03 12:36)
   Frontend:
-    ☐ Auto-cadastro de usuário;
     ☐ Autenticação;
-    ☐ Lista de produtos;
-    ☐ Criação de pedido;
-    ☐ ENTREGADOR: Listagem de pedidos;
+    ☐ Auto-cadastro de usuário;
+    ☐ COMUM: Lista de produtos;
+    ☐ COMUM: Pedidos, Inserir;
+    ☐ COMUM: Pedidos, Listar;
     ☐ ENTREGADOR: Entrega do pedido;
+    ☐ ENTREGADOR: Listagem de pedidos;
