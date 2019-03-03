@@ -8,8 +8,8 @@ TO-DO:
     ☐ Autenticação;
     ☐ CRUD: Produtos, Inserir;
     ☐ CRUD: Produtos, Alterar;
-    ☐ CRUD: Produtos, Listar;
-    ☐ CRUD: Produtos, Excluir;
+    ✔ CRUD: Produtos, Listar; @done (19-03-03 14:31)
+    ✔ CRUD: Produtos, Excluir; @done (19-03-03 14:31)
     ☐ CRUD: Pedidos, Inserir;
     ☐ CRUD: Pedidos, Alterar;
     ☐ CRUD: Pedidos, Listar;

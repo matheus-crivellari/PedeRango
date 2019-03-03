@@ -122,7 +122,7 @@ if($resultado){
                                 <td>R$ <?php print $produto->valor_prod ?></td>
                                 <td>
                                     <a href="produto_alterar.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
-                                    <a onclick="return excluir('<?php print $produto->nome_prod ?>')" href="usuario_excluir.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                                    <a onclick="return excluir('<?php print $produto->nome_prod ?>')" href="produto_excluir.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

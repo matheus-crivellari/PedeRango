@@ -9,8 +9,12 @@ $valor_prod      = $_POST['valor_prod']     ?? '';
 $descricao_prod  = $_POST['descricao_prod'] ?? '';
 $imagem_prod     = $_POST['imagem_prod']    ?? '';
 
+if(isset($_FILES[0])){
+    var_dump($_FILES[0]); die;
+}
+
 // Valida as vars do form
-if($nome_prod){
+if($nome_prod && $resumo_prod && $valor_prod){
 
     $sql = "INSERT INTO produtos_tb VALUES (0,'$nome_prod','$resumo_prod','$valor_prod','$descricao_prod','$imagem_prod')";
 
@@ -93,7 +97,7 @@ if($nome_prod){
                             </div>
                             <?php unset($_SESSION['erro']); ?>
                         <?php endif;?>
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             <!-- Campo nome produto -->
                             <div class="form-group">
                                 <label for="campoNomeProd">Produto</label>
@@ -130,6 +134,8 @@ if($nome_prod){
                             <div class="form-group">
                                 <label for="campoImagem">Imagem:</label>
                                 <input type="file" name="imagem_prod" id="campoImagem">
+                                <br>
+                                <small>.png ou .jpg de 256x256 px</small>
                             </div>
 
                             <!-- Enviar / Cancelar -->
