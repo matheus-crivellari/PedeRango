@@ -14,7 +14,7 @@ TO-DO:
     ✔ Perde foto quando edita o produto; @done (19-03-03 18:33)
     ✔ Verificação de username repetido; @done (19-03-03 12:36)
   Frontend:
-    ☐ Autenticação;
+    ☐ Autenticação com LocalStorage;
     ☐ Auto-cadastro de usuário;
     ☐ COMUM: Lista de produtos;
     ☐ COMUM: Pedidos, Inserir;
