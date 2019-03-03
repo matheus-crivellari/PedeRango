@@ -2,42 +2,56 @@
 // Inclui a conexao
 require_once '../conexao/conecta.php';
 
-// Obtem os dados do form
-$nome_prod       = $_POST['nome_prod']       ?? '';
-$resumo_prod     = $_POST['resumo_prod']     ?? '';
-$valor_prod      = $_POST['valor_prod']      ?? '';
-$descricao_prod  = $_POST['descricao_prod']  ?? '';
+// Se estiver definido o $_POST['id'], entao o usuario enviou o form de alterar
+// altera o produto no banco
+if(isset($_POST['id'])){
+    $id              = $_POST['id']             ?? '';
+    $nome_prod       = $_POST['nome_prod']      ?? '';
+    $resumo_prod     = $_POST['resumo_prod']    ?? '';
+    $valor_prod      = $_POST['valor_prod']     ?? '';
+    $descricao_prod  = $_POST['descricao_prod'] ?? '';
+    $imagem_prod     = $_POST['imagem_prod'][0] ?? '';
 
-$imagem_prod     = $_FILES['imagem_prod'] ?? null;
+    $imagem_nova     = $_FILES['imagem_nova']   ?? null;
 
-// Se existir imagem
-if($imagem_prod){
-    if($imagem_prod['name']){
-        $tipo = explode('/',$imagem_prod['type'])[1]; // Obtem o tipo do arquivo
-        $nome = md5(time()) . ".$tipo"; // Cria um novo nome para evitar sobreescrever arquvios com nomes iguais
-        $novo = '../upload/' . $nome; // Caminho completo
-        move_uploaded_file($imagem_prod["tmp_name"], $novo); // Move o arquivo carregado para o lugar desejado
+    // var_dump($imagem_nova); die;
+
+    // Se existir imagem
+    if($imagem_nova){
+        if($imagem_nova['name']){
+            $tipo = explode('/',$imagem_nova['type'])[1]; // Obtem o tipo do arquivo
+            $imagem_prod = md5(time()) . ".$tipo"; // Cria um novo nome para evitar sobreescrever arquvios com nomes iguais
+            $novo = '../upload/' . $imagem_prod; // Caminho completo
+            move_uploaded_file($imagem_nova["tmp_name"], $novo); // Move o arquivo carregado para o lugar desejado
+        }else{
+            $imagem_prod = '';
+        }
     }else{
-        $nome = '';
+        $imagem_prod = '';
     }
-}else{
-    $nome = '';
-}
 
-// Valida as vars do form
-if($nome_prod && $resumo_prod && $valor_prod){
-
-    $sql = "INSERT INTO produtos_tb VALUES (0,'$nome_prod','$resumo_prod','$valor_prod','$descricao_prod','$nome')";
+    $sql = "UPDATE produtos_tb SET nome_prod='$nome_prod', resumo_prod='$resumo_prod', valor_prod='$valor_prod', descricao_prod='$descricao_prod', imagem_prod='$imagem_prod' WHERE codigo_produto=$id";
 
     $resultado = mysqli_query($conexao, $sql);
 
     if($resultado){
-        $_SESSION['msg'] = 'Produto cadastrado com sucesso.';
-        header('Location: produto_listar.php');
-        exit; // Necessario pq nossa página contem conteudo html além do header
+        $_SESSION['msg'] = 'Produto alterado com sucesso.';
     }else{
         $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
     }
+}
+
+// Se estiver definido o $_GET['id'], obtem os dados do produto para alterar
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $resultado = mysqli_query($conexao, "SELECT * FROM produtos_tb WHERE codigo_produto=$id");
+
+    if($resultado){
+        $produto = mysqli_fetch_assoc($resultado);
+    }
+
+}else{
+    header('Location: produto_listar.php');
 }
 ?>
 <!DOCTYPE html>
@@ -87,7 +101,7 @@ if($nome_prod && $resumo_prod && $valor_prod){
 
                 <div class="row">
                     <div class="col-8 offset-2">
-                        <h1>Criar produto</h1>
+                        <h1>Alterar produto</h1>
                         <hr>
                         <?php if(isset($_SESSION['msg'])): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -109,17 +123,18 @@ if($nome_prod && $resumo_prod && $valor_prod){
                             <?php unset($_SESSION['erro']); ?>
                         <?php endif;?>
                         <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="<?php print $_GET['id']?>">
                             <!-- Campo nome produto -->
                             <div class="form-group">
                                 <label for="campoNomeProd">Produto</label>
-                                <input class="form-control" type="text" name="nome_prod" id="campoNomeProd" placeholder="Digite um nome para o produto">
+                                <input value="<?php print $produto['nome_prod'] ?>" class="form-control" type="text" name="nome_prod" id="campoNomeProd" placeholder="Digite um nome para o produto">
                                 <small>Dê um nome para o seu produto.</small>
                             </div>
 
                             <!-- Campo resumo produto -->
                             <div class="form-group">
                                 <label for="campoResumoProd">Resumo</label>
-                                <input class="form-control" type="text" name="resumo_prod" id="campoResumoProd" placeholder="Digite o resumo do produto">
+                                <input value="<?php print $produto['resumo_prod'] ?>" class="form-control" type="text" name="resumo_prod" id="campoResumoProd" placeholder="Digite o resumo do produto">
                                 <small>Breve descrição para o seu produto.</small>
                             </div>
 
@@ -130,23 +145,30 @@ if($nome_prod && $resumo_prod && $valor_prod){
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">R$</div>
                                     </div>
-                                    <input class="form-control" name="valor_prod" id="campoValor" type="number" min="0.01" step="0.01" max="2500" value="2.00" placeholoder="2.00"/>
+                                    <input value="<?php print $produto['valor_prod'] ?>" class="form-control" name="valor_prod" id="campoValor" type="number" min="0.01" step="0.01" max="2500" placeholder="4.00" />
                                 </div>
                             </div>
 
                             <!-- Campo descricao produto -->
                             <div class="form-group">
                                 <label for="campoDescricaoProd">Descrição</label>
-                                <textarea class="form-control" name="descricao_prod" id="campoDescricaoProd" rows="3" placeholder="Digite a descrição do produto"></textarea>
+                                <textarea class="form-control" name="descricao_prod" id="campoDescricaoProd" rows="3" placeholder="Digite a descrição do produto"><?php print $produto['descricao_prod'] ?></textarea>
                                 <small>Descrição completa para o seu produto.</small>
                             </div>
 
                             <!-- Imagem produto -->
                             <div class="form-group">
                                 <label for="campoImagem">Imagem:</label>
-                                <input type="file" name="imagem_prod" id="campoImagem">
+                                <input class="form-control disabled" value="<?php print $produto['imagem_prod'] ?>" type="text" id="campoImagem" disabled>
+                                <input type="hidden" value="<?php print $produto['imagem_prod'] ?>" name="imagem_prod"><!-- necessario pois input disabled nao é enviado -->
+                            </div>
+
+                            <!-- Trocar imagem produto -->
+                            <div class="form-group">
+                                <label for="novaImagem">Trocar imagem:</label>
+                                <input type="file" name="imagem_nova" id="novaImagem">
                                 <br>
-                                <small>.png ou .jpg de 256x256 px</small>
+                                <small>Selecione uma imagem para substituir a imagem existente (.png ou .jpg de 256x256 px).</small>
                             </div>
 
                             <!-- Enviar / Cancelar -->
