@@ -15,14 +15,21 @@ if(isset($_POST['id'])){
     $senha          = $_POST['senha']         ?? '';
     $tipo           = $_POST['tipo']          ?? '';
 
-    $sql = "UPDATE usuarios_tb SET username='$nome',nome_completo='$nome_completo',endereco='$endereco',estado_cod=$estado,cidade_cod=$cidade,senha='$senha',tipo='$tipo' WHERE codigo_usuario=$id";
+    $teste = mysqli_query($conexao, "SELECT codigo_usuario FROM usuarios_tb WHERE username='$nome'");
+    $teste = mysqli_fetch_assoc($teste);
 
-    $resultado = mysqli_query($conexao, $sql);
-
-    if($resultado){
-        $_SESSION['msg'] = 'Usuário alterado com sucesso.';
+    if($teste && $id != $teste['codigo_usuario']){
+        $_SESSION['erro'] = 'Este nome de usuário já existe.';
     }else{
-        $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
+        $sql = "UPDATE usuarios_tb SET username='$nome',nome_completo='$nome_completo',endereco='$endereco',estado_cod=$estado,cidade_cod=$cidade,senha='$senha',tipo='$tipo' WHERE codigo_usuario=$id";
+
+        $resultado = mysqli_query($conexao, $sql);
+
+        if($resultado){
+            $_SESSION['msg'] = 'Usuário alterado com sucesso.';
+        }else{
+            $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
+        }
     }
 }
 

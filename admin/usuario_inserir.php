@@ -12,17 +12,25 @@ $senha          = $_POST['senha']         ?? '';
 $tipo           = $_POST['tipo']          ?? '';
 
 // Valida as vars do form
-if($nome && $nome_completo && $endereco && $estado && $cidade && $senha && $tipo){
-    $sql = "INSERT INTO usuarios_tb VALUES (0,'$nome','$nome_completo','$endereco',$estado,$cidade,'$senha','$tipo')";
+if($nome){
 
-    $resultado = mysqli_query($conexao, $sql);
+    // Verifica se já existe usuário com este nome
+    $teste = mysqli_query($conexao, "SELECT codigo_usuario FROM usuarios_tb WHERE username='$nome'");
 
-    if($resultado){
-        $_SESSION['msg'] = 'Usuário cadastrado com sucesso.';
-        header('Location: usuario_listar.php');
-        exit; // Necessario pq nossa página contem conteudo html além do header
+    if(mysqli_num_rows($teste) > 0){
+        $_SESSION['erro'] = 'Este nome de usuário já existe.';
     }else{
-        $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
+        $sql = "INSERT INTO usuarios_tb VALUES (0,'$nome','$nome_completo','$endereco',$estado,$cidade,'$senha','$tipo')";
+
+        $resultado = mysqli_query($conexao, $sql);
+
+        if($resultado){
+            $_SESSION['msg'] = 'Usuário cadastrado com sucesso.';
+            header('Location: usuario_listar.php');
+            exit; // Necessario pq nossa página contem conteudo html além do header
+        }else{
+            $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
+        }
     }
 }
 
