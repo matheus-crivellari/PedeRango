@@ -30,6 +30,9 @@ create table produtos_tb(
     imagem_prod text
 );
 
+alter table produtos_tb
+    modify valor_prod decimal(5,2) not null;
+
 -- Tabela pedidos
 create table pedidos_tb(
     id_pedido int(10) not null primary key auto_increment,

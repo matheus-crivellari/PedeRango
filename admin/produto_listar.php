@@ -5,7 +5,7 @@ require_once '../conexao/conecta.php';
 $resultado = mysqli_query($conexao, 'SELECT * FROM produtos_tb');
 if($resultado){
     $total          = mysqli_num_rows($resultado);
-    $limit          = 5;
+    $limit          = 4;
     $pagina_total   = ceil($total / $limit);
     $pagina_atual   = isset($_GET['pag']) ? $_GET['pag'] : 1;
     $offset         = $limit * ($pagina_atual - 1);
@@ -39,8 +39,11 @@ if($resultado){
             height: 100%;
         }
 
-        #principal {
+        #principal, #conteudo {
             background-color: white;
+        }
+
+        #principal{
             height: 100%;
         }
 
@@ -68,7 +71,7 @@ if($resultado){
 
             </div>
         </div>
-        <div class="row">
+        <div id="conteudo" class="row">
             <div class="col-12">
                 <?php if(isset($_SESSION['msg'])): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -103,17 +106,23 @@ if($resultado){
                             <th>&nbsp;</th>
                         </thead>
                         <tbody>
-                            <?php foreach($produtos as $usuario): ?>
-                            <?php $usuario = (object) $usuario; ?>
+                            <?php foreach($produtos as $produto): ?>
+                            <?php $produto = (object) $produto; ?>
                             <tr>
-                                <td>#</td>
-                                <td>Imagem</td>
-                                <td>Produto</td>
-                                <td>Resumo</td>
-                                <td>Valor</td>
+                                <td><?php print $produto->codigo_produto ?></td>
                                 <td>
-                                    <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
-                                    <a onclick="return excluir('<?php print $usuario->nome_completo ?>')" href="usuario_excluir.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                                    <?php if($produto->imagem_prod): ?>
+                                        <img width="96px" height="96px" src="<?php print $produto->imagem_prod ?>" alt="Imagem do produto">
+                                    <?php else: ?>
+                                        <img width="96px" height="96px" src="https://via.placeholder.com/256" alt="Imagem do produto">
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php print $produto->nome_prod ?></td>
+                                <td><?php print $produto->resumo_prod ?></td>
+                                <td>R$ <?php print $produto->valor_prod ?></td>
+                                <td>
+                                    <a href="produto_alterar.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
+                                    <a onclick="return excluir('<?php print $produto->nome_prod ?>')" href="usuario_excluir.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

@@ -108,34 +108,28 @@ if($nome_prod){
                                 <small>Breve descrição para o seu produto.</small>
                             </div>
 
-                            <!-- Campo endereço -->
+                            <!-- Campo valor -->
                             <div class="form-group">
                                 <label for="campoValor">Valor</label>
-                                <input class="form-control" type="text" name="valor_prod" id="campoValor" placeholder="999.99">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">R$</div>
+                                    </div>
+                                    <input class="form-control" name="valor_prod" id="campoValor" type="number" min="0.01" step="0.01" max="2500" placeholder="4.00" />
+                                </div>
                             </div>
 
                             <!-- Campo descricao produto -->
                             <div class="form-group">
                                 <label for="campoDescricaoProd">Descrição</label>
-                                <input class="form-control" type="text" name="descricao_prod" id="campoDescricaoProd" placeholder="Digite a descrição do produto">
+                                <textarea class="form-control" name="descricao_prod" id="campoDescricaoProd" rows="3" placeholder="Digite a descrição do produto"></textarea>
                                 <small>Descrição completa para o seu produto.</small>
                             </div>
 
-                            <!-- Campo senha -->
+                            <!-- Imagem produto -->
                             <div class="form-group">
-                                <label for="campoSenha">Senha</label>
-                                <input class="form-control" type="text" name="senha" id="campoSenha" placeholder="Digite a senha do produto">
-                                <small>Até 8 dígitos.</small>
-                            </div>
-
-                            <!-- Campo tipo -->
-                            <div class="form-group">
-                                <label for="campoTipo">Tipo do produto</label>
-                                <select class="form-control" name="tipo" id="campoTipo">
-                                    <option value="com">Comum</option>
-                                    <option value="ent">Entregador</option>
-                                    <option value="adm">Administrador</option>
-                                </select>
+                                <label for="campoImagem">Imagem:</label>
+                                <input type="file" name="imagem_prod" id="campoImagem">
                             </div>
 
                             <!-- Enviar / Cancelar -->

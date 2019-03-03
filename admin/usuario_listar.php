@@ -39,8 +39,11 @@ if($resultado){
             height: 100%;
         }
 
-        #principal {
+        #principal, #conteudo {
             background-color: white;
+        }
+
+        #principal{
             height: 100%;
         }
 
@@ -68,7 +71,7 @@ if($resultado){
 
             </div>
         </div>
-        <div class="row">
+        <div id="conteudo" class="row">
             <div class="col-12">
                 <?php if(isset($_SESSION['msg'])): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
