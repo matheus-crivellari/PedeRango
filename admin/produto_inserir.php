@@ -7,16 +7,22 @@ $nome_prod       = $_POST['nome_prod']      ?? '';
 $resumo_prod     = $_POST['resumo_prod']    ?? '';
 $valor_prod      = $_POST['valor_prod']     ?? '';
 $descricao_prod  = $_POST['descricao_prod'] ?? '';
-$imagem_prod     = $_POST['imagem_prod']    ?? '';
+$imagem_prod     = $_FILES['imagem_prod']   ?? null;
 
-if(isset($_FILES[0])){
-    var_dump($_FILES[0]); die;
+// Se existir imagem
+if($imagem_prod){
+    $tipo = explode('/',$imagem_prod['type'])[1]; // Obtem o tipo do arquivo
+    $nome = md5(time()) . ".$tipo"; // Cria um novo nome para evitar sobreescrever arquvios com nomes iguais
+    $novo = '../upload/' . $nome; // Caminho completo
+    move_uploaded_file($imagem_prod["tmp_name"], $novo); // Move o arquivo carregado para o lugar desejado
+}else{
+    $nome = '';
 }
 
 // Valida as vars do form
 if($nome_prod && $resumo_prod && $valor_prod){
 
-    $sql = "INSERT INTO produtos_tb VALUES (0,'$nome_prod','$resumo_prod','$valor_prod','$descricao_prod','$imagem_prod')";
+    $sql = "INSERT INTO produtos_tb VALUES (0,'$nome_prod','$resumo_prod','$valor_prod','$descricao_prod','$nome')";
 
     $resultado = mysqli_query($conexao, $sql);
 

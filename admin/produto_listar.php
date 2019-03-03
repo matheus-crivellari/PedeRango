@@ -112,7 +112,7 @@ if($resultado){
                                 <td><?php print $produto->codigo_produto ?></td>
                                 <td>
                                     <?php if($produto->imagem_prod): ?>
-                                        <img width="96px" height="96px" src="<?php print $produto->imagem_prod ?>" alt="Imagem do produto">
+                                        <img width="96px" height="96px" src="../upload/<?php print $produto->imagem_prod ?>" alt="Imagem do produto">
                                     <?php else: ?>
                                         <img width="96px" height="96px" src="https://via.placeholder.com/256" alt="Imagem do produto">
                                     <?php endif; ?>
