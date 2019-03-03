@@ -128,6 +128,9 @@ if($resultado){
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <?php if(count($produtos) < 1): ?>
+                        <div class="alert alert-secondary" role="alert">Você ainda não possui produtos cadastrados.</div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="row justify-content-center">

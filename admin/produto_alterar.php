@@ -10,9 +10,9 @@ if(isset($_POST['id'])){
     $resumo_prod     = $_POST['resumo_prod']    ?? '';
     $valor_prod      = $_POST['valor_prod']     ?? '';
     $descricao_prod  = $_POST['descricao_prod'] ?? '';
-    $imagem_prod     = $_POST['imagem_prod'][0] ?? '';
+    $imagem_prod     = $_POST['imagem_prod']    ?? '';
 
-    $imagem_nova     = $_FILES['imagem_nova']   ?? null;
+    $imagem_nova     = $_FILES['imagem_nova'] ?? null;
 
     // var_dump($imagem_nova); die;
 
@@ -23,11 +23,7 @@ if(isset($_POST['id'])){
             $imagem_prod = md5(time()) . ".$tipo"; // Cria um novo nome para evitar sobreescrever arquvios com nomes iguais
             $novo = '../upload/' . $imagem_prod; // Caminho completo
             move_uploaded_file($imagem_nova["tmp_name"], $novo); // Move o arquivo carregado para o lugar desejado
-        }else{
-            $imagem_prod = '';
         }
-    }else{
-        $imagem_prod = '';
     }
 
     $sql = "UPDATE produtos_tb SET nome_prod='$nome_prod', resumo_prod='$resumo_prod', valor_prod='$valor_prod', descricao_prod='$descricao_prod', imagem_prod='$imagem_prod' WHERE codigo_produto=$id";

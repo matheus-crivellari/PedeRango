@@ -1,8 +1,8 @@
 TO-DO:
   Backend:
-    ✔ Autenticação; @done (19-03-03 17:38)
-    ☐ Restrição de acessos por perfil;
     ☐ CRUD: Pedidos, Listar;
+    ☐ Restrição de acessos por perfil;
+    ✔ Autenticação; @done (19-03-03 17:38)
     ✔ CRUD: Produtos, Alterar; @done (19-03-03 15:31)
     ✔ CRUD: Produtos, Excluir; @done (19-03-03 14:31)
     ✔ CRUD: Produtos, Inserir; @done (19-03-03 14:49)
@@ -11,6 +11,7 @@ TO-DO:
     ✔ CRUD: Usuários, Excluir; @done (19-03-02 20:00)
     ✔ CRUD: Usuários, Inserir; @done (19-03-02 20:00)
     ✔ CRUD: Usuários, Listar; @done (19-03-02 20:00)
+    ✔ Perde foto quando edita o produto; @done (19-03-03 18:33)
     ✔ Verificação de username repetido; @done (19-03-03 12:36)
   Frontend:
     ☐ Autenticação;

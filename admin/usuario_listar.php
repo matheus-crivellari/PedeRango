@@ -133,13 +133,20 @@ if($resultado){
                                         ?>
                                 </td>
                                 <td>
-                                    <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
-                                    <a onclick="return excluir('<?php print $usuario->nome_completo ?>')" href="usuario_excluir.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                                    <?php if($usuario->codigo_usuario == 1): ?>
+                                        <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
+                                    <?php else: ?>
+                                        <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
+                                        <a onclick="return excluir('<?php print $usuario->nome_completo ?>')" href="usuario_excluir.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <?php if(count($usuarios) < 1): ?>
+                        <div class="alert alert-secondary" role="alert">Não existem usuários cadastrados.</div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="row justify-content-center">
