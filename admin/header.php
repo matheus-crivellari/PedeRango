@@ -16,7 +16,7 @@
         <a class="nav-link" href="pedido_listar.php">Pedidos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pedido_listar.php"><i class="fa fa-sign-out"></i> Sair</a>
+        <a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Sair</a>
       </li>
     </ul>
   </div>
