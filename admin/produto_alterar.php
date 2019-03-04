@@ -2,6 +2,12 @@
 // Inclui a conexao
 require_once '../conexao/conecta.php';
 
+// Restrição de acesso
+require_once 'entregador.php';
+
+// Area do site
+$area = 'produto';
+
 // Se estiver definido o $_POST['id'], entao o usuario enviou o form de alterar
 // altera o produto no banco
 if(isset($_POST['id'])){

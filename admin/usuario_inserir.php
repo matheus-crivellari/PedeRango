@@ -5,6 +5,9 @@ require_once '../conexao/conecta.php';
 // Restrição de acesso
 require_once 'admin.php';
 
+// Area do site
+$area = 'usuario';
+
 // Obtem os dados do form
 $nome           = $_POST['nome']          ?? '';
 $nome_completo  = $_POST['nome_completo'] ?? '';

@@ -6,20 +6,20 @@ require_once '../conexao/conecta.php';
 require_once 'entregador.php';
 
 // Area do site
-$area = 'produto';
+$area = 'pedido';
 
-$resultado = mysqli_query($conexao, 'SELECT * FROM produtos_tb');
+$resultado = mysqli_query($conexao, 'SELECT * FROM usuarios_tb');
 if($resultado){
     $total          = mysqli_num_rows($resultado);
-    $limit          = 4;
+    $limit          = 5;
     $pagina_total   = ceil($total / $limit);
     $pagina_atual   = isset($_GET['pag']) ? $_GET['pag'] : 1;
     $offset         = $limit * ($pagina_atual - 1);
 
-    $resultado = mysqli_query($conexao, "SELECT * FROM produtos_tb LIMIT $offset, $limit");
-    $produtos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+    $resultado = mysqli_query($conexao, "SELECT * FROM usuarios_tb LIMIT $offset, $limit");
+    $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 }else{
-    $produtos = [];
+    $usuarios = [];
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ if($resultado){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Produtos</title>
+    <title>Usuários</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -69,9 +69,9 @@ if($resultado){
                 <div class="p-3">
 
                     <div class="alert alert-secondary" role="alert">
-                        <h4 class="alert-heading">Administração de produtos</h4>
+                        <h4 class="alert-heading">Administração de usuários</h4>
                         <hr>
-                        <p class="mb-0">Aqui você pode administrar seus produtos.</p>
+                        <p class="mb-0">Aqui você pode administrar seus usuários.</p>
                     </div>
                 </div>
 
@@ -99,43 +99,59 @@ if($resultado){
                     <?php unset($_SESSION['erro']); ?>
                 <?php endif;?>
 
-                <a class="btn btn-primary" href="produto_inserir.php" role="button"><i class="fa fa-plus"></i> Novo produto</a>
+                <a class="btn btn-primary" href="usuario_inserir.php" role="button"><i class="fa fa-plus"></i> Novo usuário</a>
 
                 <div class="table-responsive mt-3">
                     <table class="table">
                         <thead>
                             <th>#</th>
-                            <th>Imagem</th>
-                            <th>Produto</th>
-                            <th width="40%">Resumo</th>
-                            <th>Valor</th>
-                            <th>&nbsp;</th>
+                            <th>Username</th>
+                            <th>Nome completo</th>
+                            <th>Tipo</th>
+                            <th colspan="2">&nbsp;</th>
                         </thead>
                         <tbody>
-                            <?php foreach($produtos as $produto): ?>
-                            <?php $produto = (object) $produto; ?>
+                            <?php foreach($usuarios as $usuario): ?>
+                            <?php $usuario = (object) $usuario; ?>
                             <tr>
-                                <td><?php print $produto->codigo_produto ?></td>
+                                <td><?php print $usuario->codigo_usuario ?></td>
+                                <td><?php print $usuario->username ?></td>
+                                <td><?php print $usuario->nome_completo ?></td>
                                 <td>
-                                    <?php if($produto->imagem_prod): ?>
-                                        <img width="96px" height="96px" src="../upload/<?php print $produto->imagem_prod ?>" alt="Imagem do produto">
-                                    <?php else: ?>
-                                        <img width="96px" height="96px" src="https://via.placeholder.com/256" alt="Imagem do produto">
-                                    <?php endif; ?>
+                                    <?php
+                                            switch ($usuario->tipo) {
+                                                case 'adm':
+                                                    echo 'Administrador';
+                                                    break;
+
+                                                case 'com':
+                                                    echo 'Comum';
+                                                    break;
+
+                                                case 'ent':
+                                                    echo 'Entregador';
+                                                    break;
+
+                                                default:
+                                                    echo 'Comum';
+                                                    break;
+                                            }
+                                        ?>
                                 </td>
-                                <td><?php print $produto->nome_prod ?></td>
-                                <td><?php print $produto->resumo_prod ?></td>
-                                <td>R$ <?php print str_replace('.', ',', $produto->valor_prod) ?></td>
                                 <td>
-                                    <a href="produto_alterar.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
-                                    <a onclick="return excluir('<?php print $produto->nome_prod ?>')" href="produto_excluir.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                                    <?php if($usuario->codigo_usuario == 1): ?>
+                                        <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
+                                    <?php else: ?>
+                                        <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
+                                        <a onclick="return excluir('<?php print $usuario->nome_completo ?>')" href="usuario_excluir.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <?php if(count($produtos) < 1): ?>
-                        <div class="alert alert-secondary" role="alert">Você ainda não possui produtos cadastrados.</div>
+                    <?php if(count($usuarios) < 1): ?>
+                        <div class="alert alert-secondary" role="alert">Não existem usuários cadastrados.</div>
                     <?php endif; ?>
                 </div>
 

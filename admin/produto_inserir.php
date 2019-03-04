@@ -2,6 +2,12 @@
 // Inclui a conexao
 require_once '../conexao/conecta.php';
 
+// Restrição de acesso
+require_once 'entregador.php';
+
+// Area do site
+$area = 'produto';
+
 // Obtem os dados do form
 $nome_prod       = $_POST['nome_prod']       ?? '';
 $resumo_prod     = $_POST['resumo_prod']     ?? '';

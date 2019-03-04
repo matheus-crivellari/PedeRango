@@ -5,6 +5,9 @@ require_once '../conexao/conecta.php';
 // Restrição de acesso
 require_once 'admin.php';
 
+// Area do site
+$area = 'usuario';
+
 // Se estiver definido o $_POST['id'], entao o usuario enviou o form de alterar
 // altera o usuario no banco
 if(isset($_POST['id'])){

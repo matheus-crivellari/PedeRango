@@ -13,7 +13,6 @@ if(!isset($_SESSION['codigo_usuario'])){
 // Mas se não for nenhum dos tipos permitidos
 // redireciona
 if($_SESSION['tipo'] != 'adm'){
-    $_SESSION['erro'] = 'Você não tem permissão para visualizar este conteúdo.';
     header('Location: acesso_proibido.php');
     exit;
 }

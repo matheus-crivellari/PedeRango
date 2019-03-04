@@ -5,6 +5,9 @@ require_once '../conexao/conecta.php';
 // Restrição de acesso
 require_once 'admin.php';
 
+// Area do site
+$area = 'usuario';
+
 // Obtem o id do link
 $id = $_GET['id'] ?? 0;
 
