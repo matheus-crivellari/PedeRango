@@ -1,1 +1,6 @@
-/upload/*.[jpg|png]
+/upload/*.jpg
+/upload/*.jpeg
+/upload/*.png
+/upload/*.JPG
+/upload/*.JPEG
+/upload/*.PNG
