@@ -142,7 +142,7 @@ if($resultado){
                                     <td><?php print date('d/m/Y',strtotime($pedido->data_pedido)) ?></td>
                                     <td class="text-muted"><?php print ($pedido->data_fechamento ?? 'Aberto') ?></td>
                                     <td>
-                                        <select <?php if($pedido->status_pedido == 'pago') print 'disabled' ?> onchange="form.submit()" class="form-control" name="status" id="campoStatus">
+                                        <select <?php if($pedido->status_pedido == 'pago') print 'disabled' ?> onchange="return alterar(form)" class="form-control" name="status" id="campoStatus">
                                             <option <?php if($pedido->status_pedido == 'aguardando') print 'selected' ?> value="aguardando">Aguardando</option>
                                             <option <?php if($pedido->status_pedido == 'em preparacao') print 'selected' ?> value="em preparacao">Em preparação</option>
                                             <option <?php if($pedido->status_pedido == 'entrega') print 'selected' ?> value="entrega">Saiu para entrega</option>
@@ -150,7 +150,7 @@ if($resultado){
                                         </select>
                                     </td>
                                     <td>
-                                        <a class="btn btn-block btn-primary" href="pedido_alterar.php"><i class="fa fa-eye"></i> Ver pedido</a>
+                                        <a class="btn btn-block btn-primary" href="pedido_alterar.php?id=<?php print $pedido->id_pedido ?>"><i class="fa fa-eye"></i> Ver pedido</a>
                                     </td>
                                 </form>
                             </tr>
@@ -186,10 +186,12 @@ if($resultado){
         </div>
     </div>
     <script>
-        function excluir(nome) {
-            if (confirm('Tem certeza que deseja excluir "' + nome + '"?')) {
+        function alterar(formulario) {
+            if (confirm('Tem certeza que deseja alterar a situação deste pedido?')) {
+                formulario.submit();
                 return true;
             } else {
+                window.location.reload();
                 return false;
             }
         }

@@ -125,7 +125,7 @@ if($resultado){
                                 </td>
                                 <td><?php print $produto->nome_prod ?></td>
                                 <td><?php print $produto->resumo_prod ?></td>
-                                <td>R$ <?php print str_replace('.', ',', $produto->valor_prod) ?></td>
+                                <td>R$ <?php print number_format($produto->valor_prod,2,',','.') ?></td>
                                 <td>
                                     <a href="produto_alterar.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
                                     <a onclick="return excluir('<?php print $produto->nome_prod ?>')" href="produto_excluir.php?id=<?php print $produto->codigo_produto ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
