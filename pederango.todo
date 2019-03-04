@@ -1,6 +1,6 @@
 TO-DO:
   Backend:
-    ☐ CRUD: Pedidos, Alterar;
+    ✔ CRUD: Pedidos, Alterar; @done (19-03-04 17:06)
     ✔ Autenticação; @done (19-03-03 17:38)
     ✔ CRUD: Pedidos, Listar; @done (19-03-04 15:01)
     ✔ CRUD: Produtos, Alterar; @done (19-03-03 15:31)
