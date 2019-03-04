@@ -45,6 +45,11 @@ create table pedidos_tb(
     foreign key(cod_usuario) references usuarios_tb(codigo_usuario)
 );
 
+insert into pedidos_tb values (0,3,now(),null,'em preparacao');
+insert into pedidos_tb values (0,3,now(),null,'aguardando');
+insert into pedidos_tb values (0,3,now(),null,'entrega');
+insert into pedidos_tb values (0,3,now(),null,'pago');
+
 -- Tabela pedidos/produtos
 create table produtos_pedidos(
     id int(10) not null primary key auto_increment,

@@ -8,7 +8,17 @@ require_once 'entregador.php';
 // Area do site
 $area = 'pedido';
 
-$resultado = mysqli_query($conexao, 'SELECT * FROM usuarios_tb');
+// Se existir filtro na URL
+$filtro = $_GET['filtro'] ?? '';
+// Monta uma clausula WHERE para filtrar por status
+if($filtro){
+    $filtro_sql = " AND pedidos_tb.status_pedido = '$filtro' ";
+}else{
+    $filtro_sql = '';
+}
+
+// Obtem contagem de linhas de peidos filtrados
+$resultado = mysqli_query($conexao, "SELECT id_pedido FROM pedidos_tb WHERE 1=1 $filtro_sql ORDER BY data_pedido");
 if($resultado){
     $total          = mysqli_num_rows($resultado);
     $limit          = 5;
@@ -16,10 +26,10 @@ if($resultado){
     $pagina_atual   = isset($_GET['pag']) ? $_GET['pag'] : 1;
     $offset         = $limit * ($pagina_atual - 1);
 
-    $resultado = mysqli_query($conexao, "SELECT * FROM usuarios_tb LIMIT $offset, $limit");
-    $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+    $resultado = mysqli_query($conexao, "SELECT usuarios_tb.nome_completo, pedidos_tb.* FROM pedidos_tb INNER JOIN usuarios_tb ON usuarios_tb.codigo_usuario = pedidos_tb.cod_usuario WHERE 1=1 $filtro_sql ORDER BY pedidos_tb.data_pedido LIMIT $offset, $limit");
+    $pedidos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 }else{
-    $usuarios = [];
+    $pedidos = [];
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +39,7 @@ if($resultado){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Usuários</title>
+    <title>Pedidos</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -69,9 +79,9 @@ if($resultado){
                 <div class="p-3">
 
                     <div class="alert alert-secondary" role="alert">
-                        <h4 class="alert-heading">Administração de usuários</h4>
+                        <h4 class="alert-heading">Administração de pedidos</h4>
                         <hr>
-                        <p class="mb-0">Aqui você pode administrar seus usuários.</p>
+                        <p class="mb-0">Aqui você pode administrar seus pedidos.</p>
                     </div>
                 </div>
 
@@ -99,59 +109,56 @@ if($resultado){
                     <?php unset($_SESSION['erro']); ?>
                 <?php endif;?>
 
-                <a class="btn btn-primary" href="usuario_inserir.php" role="button"><i class="fa fa-plus"></i> Novo usuário</a>
+                <!-- <a class="btn btn-primary" href="usuario_inserir.php" role="button"><i class="fa fa-plus"></i> Novo pedido</a> -->
+                <form class="form-inline">
+                    <label for="campoFiltro">Filtro por situação:</label>&nbsp;&nbsp;
+                    <select onchange="form.submit()" class="form-control" id="campoFiltro" name="filtro">
+                        <option value="">Todos</option>
+                        <option <?php if($filtro == 'aguardando') print 'selected' ?> value="aguardando">Aguardando</option>
+                        <option <?php if($filtro == 'em preparacao') print 'selected' ?> value="em preparacao">Em preparação</option>
+                        <option <?php if($filtro == 'entrega') print 'selected' ?> value="entrega">Saiu para entrega</option>
+                        <option <?php if($filtro == 'pago') print 'selected' ?> value="pago">Pago</option>
+                    </select>
+                </form>
 
                 <div class="table-responsive mt-3">
                     <table class="table">
                         <thead>
-                            <th>#</th>
-                            <th>Username</th>
-                            <th>Nome completo</th>
-                            <th>Tipo</th>
-                            <th colspan="2">&nbsp;</th>
+                            <th>Pedido #</th>
+                            <th>Cliente</th>
+                            <th>Realizado em</th>
+                            <th>Fechado em</th>
+                            <th>Situação</th>
+                            <th>&nbsp;</th>
                         </thead>
                         <tbody>
-                            <?php foreach($usuarios as $usuario): ?>
-                            <?php $usuario = (object) $usuario; ?>
+                            <?php foreach($pedidos as $pedido): ?>
+                            <?php $pedido = (object) $pedido; ?>
                             <tr>
-                                <td><?php print $usuario->codigo_usuario ?></td>
-                                <td><?php print $usuario->username ?></td>
-                                <td><?php print $usuario->nome_completo ?></td>
-                                <td>
-                                    <?php
-                                            switch ($usuario->tipo) {
-                                                case 'adm':
-                                                    echo 'Administrador';
-                                                    break;
-
-                                                case 'com':
-                                                    echo 'Comum';
-                                                    break;
-
-                                                case 'ent':
-                                                    echo 'Entregador';
-                                                    break;
-
-                                                default:
-                                                    echo 'Comum';
-                                                    break;
-                                            }
-                                        ?>
-                                </td>
-                                <td>
-                                    <?php if($usuario->codigo_usuario == 1): ?>
-                                        <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
-                                    <?php else: ?>
-                                        <a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</a>
-                                        <a onclick="return excluir('<?php print $usuario->nome_completo ?>')" href="usuario_excluir.php?id=<?php print $usuario->codigo_usuario ?>" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
-                                    <?php endif; ?>
-                                </td>
+                                <form method="post" action="pedido_alterar_status.php">
+                                    <input type="hidden" name="id" value="<?php print $pedido->id_pedido ?>">
+                                    <td><?php print str_pad($pedido->id_pedido,5,'0',STR_PAD_LEFT) ?></td>
+                                    <td><a href="usuario_alterar.php?id=<?php print $pedido->cod_usuario ?>"><?php print $pedido->nome_completo ?></a></td>
+                                    <td><?php print date('d/m/Y',strtotime($pedido->data_pedido)) ?></td>
+                                    <td class="text-muted"><?php print ($pedido->data_fechamento ?? 'Aberto') ?></td>
+                                    <td>
+                                        <select <?php if($pedido->status_pedido == 'pago') print 'disabled' ?> onchange="form.submit()" class="form-control" name="status" id="campoStatus">
+                                            <option <?php if($pedido->status_pedido == 'aguardando') print 'selected' ?> value="aguardando">Aguardando</option>
+                                            <option <?php if($pedido->status_pedido == 'em preparacao') print 'selected' ?> value="em preparacao">Em preparação</option>
+                                            <option <?php if($pedido->status_pedido == 'entrega') print 'selected' ?> value="entrega">Saiu para entrega</option>
+                                            <option <?php if($pedido->status_pedido == 'pago') print 'selected' ?> value="pago">Pago</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-block btn-primary" href="pedido_alterar.php"><i class="fa fa-eye"></i> Ver pedido</a>
+                                    </td>
+                                </form>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <?php if(count($usuarios) < 1): ?>
-                        <div class="alert alert-secondary" role="alert">Não existem usuários cadastrados.</div>
+                    <?php if(count($pedidos) < 1): ?>
+                        <div class="alert alert-secondary" role="alert">Não existem pedidos cadastrados.</div>
                     <?php endif; ?>
                 </div>
 
@@ -159,8 +166,8 @@ if($resultado){
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <?php if($pagina_atual > 1): ?>
-                            <li class="page-item"><a class="page-link" href="?pag=1">Primeira</a></li>
-                            <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_atual - 1; ?>">Anterior</a></li>
+                            <li class="page-item"><a class="page-link" href="?filtro=<?php print $filtro ?>&pag=1">Primeira</a></li>
+                            <li class="page-item"><a class="page-link" href="?filtro=<?php print $filtro ?>&pag=<?php print $pagina_atual - 1; ?>">Anterior</a></li>
                             <?php endif;?>
 
                             <?php if($pagina_total > 1): ?>
@@ -169,8 +176,8 @@ if($resultado){
                             <?php endif;?>
 
                             <?php if($pagina_atual < $pagina_total): ?>
-                            <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_atual + 1; ?>">Próximo</a></li>
-                            <li class="page-item"><a class="page-link" href="?pag=<?php print $pagina_total; ?>">Última</a></li>
+                            <li class="page-item"><a class="page-link" href="?filtro=<?php print $filtro ?>&pag=<?php print $pagina_atual + 1; ?>">Próximo</a></li>
+                            <li class="page-item"><a class="page-link" href="?filtro=<?php print $filtro ?>&pag=<?php print $pagina_total; ?>">Última</a></li>
                             <?php endif;?>
                         </ul>
                     </nav>
