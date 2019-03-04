@@ -188,7 +188,7 @@ if(isset($_GET['id'])){
                                     <button class="btn btn-block btn-primary" type="submit" value="Salvar"><i class="fa fa-floppy-o"></i> Salvar</button>
                                 </div>
                                 <div class="col-6">
-                                    <a href="javascript:window.history.back()" class="btn btn-block btn-secondary"><i class="fa fa-arrow-left"></i> Voltar</a>
+                                    <a href="produto_listar.php" class="btn btn-block btn-secondary"><i class="fa fa-arrow-left"></i> Voltar</a>
                                 </div>
                             </div>
                         </form>

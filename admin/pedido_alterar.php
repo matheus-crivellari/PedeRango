@@ -11,7 +11,22 @@ $area = 'pedido';
 // Se estiver definido o $_POST['id'], entao o usuario enviou o form de alterar
 // altera o pedido no banco
 if(isset($_POST['id'])){
+    $id =            $_POST['id'] ?? '';
+    $cod_usuario =   $_POST['usuario'] ?? '';
+    $data_pedido =   $_POST['data_pedido'] ?? '';
+    $status_pedido = $_POST['status'] ?? '';
 
+    if($id){
+        $sql = "UPDATE pedidos_tb SET cod_usuario='$cod_usuario',data_pedido='$data_pedido',status_pedido='$status_pedido' WHERE id_pedido=$id";
+
+        $resultado = mysqli_query($conexao, $sql);
+
+        if($resultado){
+            $_SESSION['msg'] = 'Pedido alterado com sucesso.';
+        }else{
+            $_SESSION['erro'] = 'Houve um erro ao alterar o registro.';
+        }
+    }
 }
 
 // Se estiver definido o $_GET['id'], obtem os dados do pedido para alterar
@@ -119,7 +134,7 @@ if($resultado){
                         <?php endif;?>
 
                         <!-- Formulario -->
-                        <form method="post">
+                        <form onsubmit="return enviar()" method="post">
                             <!-- Campo id -->
                             <input type="hidden" name="id" value="<?= $id ?>">
 
@@ -204,7 +219,7 @@ if($resultado){
                                     <button class="btn btn-block btn-primary" type="submit" value="Salvar"><i class="fa fa-floppy-o"></i> Salvar</button>
                                 </div>
                                 <div class="col-6">
-                                    <a href="javascript:window.history.back()" class="btn btn-block btn-secondary"><i class="fa fa-arrow-left"></i> Voltar</a>
+                                    <a href="pedido_listar.php" class="btn btn-block btn-secondary"><i class="fa fa-arrow-left"></i> Voltar</a>
                                 </div>
                             </div>
                         </form>
@@ -213,5 +228,10 @@ if($resultado){
             </div>
         </div>
     </div>
+    <script>
+        function enviar() {
+            return confirm('Tem certeza que deseja alterar este pdido?');
+        }
+    </script>
 </body>
 </html>
