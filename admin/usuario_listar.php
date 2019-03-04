@@ -2,6 +2,9 @@
 // Inclui a conexao
 require_once '../conexao/conecta.php';
 
+// Restrição de acesso
+require_once 'admin.php';
+
 $resultado = mysqli_query($conexao, 'SELECT * FROM usuarios_tb');
 if($resultado){
     $total          = mysqli_num_rows($resultado);

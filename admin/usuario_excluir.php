@@ -2,6 +2,9 @@
 // Inclui a conexao
 require_once '../conexao/conecta.php';
 
+// Restrição de acesso
+require_once 'admin.php';
+
 // Obtem o id do link
 $id = $_GET['id'] ?? 0;
 
