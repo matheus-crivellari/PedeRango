@@ -24,6 +24,11 @@ if(isset($_POST['id'])){
 
     // Se existir imagem
     if($imagem_nova){
+        // Se o arquivo antigo existe
+        if(file_exists('../upload/' . $imagem_prod)){
+            unlink('../upload/' . $imagem_prod); // Deleta o arquivo antigo do disco
+        }
+
         if($imagem_nova['name']){ // Se existir nome da imagem
             $tipo = explode('/',$imagem_nova['type'])[1]; // Obtem o tipo do arquivo
             $imagem_prod = md5(time()) . ".$tipo"; // Cria um novo nome para evitar sobreescrever arquvios com nomes iguais
@@ -73,17 +78,21 @@ if(isset($_GET['id'])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <style>
-        html, body {
+        html,
+        body {
             background-color: #dadada;
             height: 100%;
         }
 
-        #principal{
+        #principal, #conteudo {
             background-color: white;
+        }
+
+        #principal{
             height: 100%;
         }
 
-        .pag{
+        .pag {
             pointer-events: none;
             user-select: none;
         }
@@ -101,7 +110,7 @@ if(isset($_GET['id'])){
         <div class="row mt-5">
             <div class="col-12">
 
-                <div class="row">
+                <div class="row" id="conteudo">
                     <div class="col-8 offset-2">
                         <h1>Alterar produto</h1>
                         <hr>
