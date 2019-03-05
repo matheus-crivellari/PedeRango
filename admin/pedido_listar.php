@@ -139,8 +139,8 @@ if($resultado){
                                     <input type="hidden" name="id" value="<?php print $pedido->id_pedido ?>">
                                     <td><?php print str_pad($pedido->id_pedido,5,'0',STR_PAD_LEFT) ?></td>
                                     <td><a href="usuario_alterar.php?id=<?php print $pedido->cod_usuario ?>"><?php print $pedido->nome_completo ?></a></td>
-                                    <td><?php print date('d/m/Y',strtotime($pedido->data_pedido)) ?></td>
-                                    <td class="text-muted"><?php print ($pedido->data_fechamento ?? 'Aberto') ?></td>
+                                    <td><?php print date('d/m/Y H:i:s',strtotime($pedido->data_pedido)) ?></td>
+                                    <td class="text-muted"><?php print ($pedido->data_fechamento ? date('d/m/Y H:i:s',strtotime($pedido->data_fechamento)) :  'Aberto') ?></td>
                                     <td>
                                         <select <?php if($pedido->status_pedido == 'pago') print 'disabled' ?> onchange="return alterar(form)" class="form-control" name="status" id="campoStatus">
                                             <option <?php if($pedido->status_pedido == 'aguardando') print 'selected' ?> value="aguardando">Aguardando</option>

@@ -17,7 +17,11 @@ if(isset($_POST['id'])){
     $status_pedido = $_POST['status'] ?? '';
 
     if($id){
-        $sql = "UPDATE pedidos_tb SET cod_usuario='$cod_usuario',data_pedido='$data_pedido',status_pedido='$status_pedido' WHERE id_pedido=$id";
+        if($status_pedido == 'pago'){
+            $sql = "UPDATE pedidos_tb SET cod_usuario='$cod_usuario',data_pedido='$data_pedido',status_pedido='$status_pedido', data_fechamento=now() WHERE id_pedido=$id";
+        }else{
+            $sql = "UPDATE pedidos_tb SET cod_usuario='$cod_usuario',data_pedido='$data_pedido',status_pedido='$status_pedido' WHERE id_pedido=$id";
+        }
 
         $resultado = mysqli_query($conexao, $sql);
 
@@ -214,7 +218,7 @@ if($resultado){
                             </div>
 
                             <!-- Enviar / Cancelar -->
-                            <div class="form-row">
+                            <div class="form-row mb-4">
                                 <div class="col-6">
                                     <button class="btn btn-block btn-primary" type="submit" value="Salvar"><i class="fa fa-floppy-o"></i> Salvar</button>
                                 </div>

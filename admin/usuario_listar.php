@@ -16,7 +16,7 @@ if($resultado){
     $pagina_atual   = isset($_GET['pag']) ? $_GET['pag'] : 1;
     $offset         = $limit * ($pagina_atual - 1);
 
-    $resultado = mysqli_query($conexao, "SELECT * FROM usuarios_tb LIMIT $offset, $limit");
+    $resultado = mysqli_query($conexao, "SELECT * FROM usuarios_tb ORDER BY tipo, username LIMIT $offset, $limit");
     $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 }else{
     $usuarios = [];
