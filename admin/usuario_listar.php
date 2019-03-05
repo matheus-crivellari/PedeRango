@@ -116,7 +116,7 @@ if($resultado){
                             <tr>
                                 <td><?php print $usuario->codigo_usuario ?></td>
                                 <td><?php print $usuario->username ?></td>
-                                <td><?php print $usuario->nome_completo ?></td>
+                                <td><a href="usuario_alterar.php?id=<?php print $usuario->codigo_usuario ?>"><?php print $usuario->nome_completo ?></a></td>
                                 <td>
                                     <?php
                                             switch ($usuario->tipo) {
