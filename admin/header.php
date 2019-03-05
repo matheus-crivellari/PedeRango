@@ -6,14 +6,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item <?php if($area == 'usuario') print 'active' ?>">
-        <a class="nav-link" href="usuario_listar.php">Usuários</a>
-      </li>
       <li class="nav-item <?php if($area == 'produto') print 'active' ?>">
         <a class="nav-link" href="produto_listar.php">Produtos</a>
       </li>
       <li class="nav-item <?php if($area == 'pedido') print 'active' ?>">
         <a class="nav-link" href="pedido_listar.php">Pedidos</a>
+      </li>
+      <li class="nav-item <?php if($area == 'usuario') print 'active' ?>">
+        <a class="nav-link" href="usuario_listar.php">Usuários</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Sair</a>
