@@ -98,7 +98,7 @@ if(isset($_POST['username'])){
     <form class="form-signin" method="post">
 
         <!-- Formulario de login -->
-        <img class="mb-4 logo" src="../img/pederango_logo1.png" alt="PedeRango logo" title="PedeRango logo">
+        <img class="mb-4 logo" src="../img/logo.png" alt="PedeRango logo" title="PedeRango logo">
         <h1 class="h3 mb-3 font-weight-normal">Por favor, entre</h1>
 
         <!-- Alerta de mensagens -->

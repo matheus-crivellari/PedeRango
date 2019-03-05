@@ -15,9 +15,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style/index.css">
+    <style>
+        img.logo{
+            margin: auto;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .logo-wrapper{
+            position: relative;
+
+            width: 100%;
+            height: 320px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Navbar e Cabeçalho -->
     <header>
         <div class="bg-dark collapse" id="navbarHeader" style="">
             <div class="container">
@@ -54,11 +78,15 @@
         </div>
     </header>
 
+    <!-- Conteúdo da página -->
     <main role="main">
 
         <section id="capa" class="jumbotron text-center">
             <div class="container" style="color: white">
-                <h1 class="jumbotron-heading">PedeRango.com</h1>
+                <div class="logo-wrapper mb-4">
+                    <img class="logo" src="img/logo.png" alt="">
+                </div>
+                <!-- <h1 class="jumbotron-heading">PedeRango.com</h1> -->
                 <p class="lead text-muted" style="color: white! important">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Porro mollitia minus ipsum excepturi tenetur, aliquam eos dolores, quia saepe.</p>
                 <p>
