@@ -15,9 +15,12 @@ create table usuarios_tb(
     tipo enum('adm', 'com', 'ent') -- administrador, comum, entregador
 );
 
-insert into usuarios_tb values (0, 'admin', 'Administrador Usuário',   'Rua Nome da Rua, 999 - Bairro', 1, 80,      '123', 'adm');
-insert into usuarios_tb values (0, 'comum', 'Usuário Comum',           'Rua Nome da Rua, 999 - Bairro', 26, 5141,   '123', 'com');
-insert into usuarios_tb values (0, 'entregador', 'Usuário Entregador', 'Rua Nome da Rua, 999 - Bairro', 26, 4724,   '123', 'ent');
+-- Insert na tabela de usuarios
+insert into usuarios_tb (codigo_usuario, username, nome_completo, endereco, estado_cod, cidade_cod, senha, tipo) values
+(1, 'admin', 'administrador usuã¡rio', 'rua nome da rua, 999 - bairro', 1, 80, '123', 'adm'),
+(2, 'joao', 'joã£o da silva', 'rua nome da rua, 999 - bairro', 26, 5141, '123', 'com'),
+(3, 'entregador', 'usuã¡rio entregador', 'rua nome da rua, 999 - bairro', 26, 4724, '123', 'ent'),
+(4, 'maria', 'maria da silva', 'rua nome da rua, 999 - bairro', 26, 5141, '123', 'com');
 
 -- Tabela produtos
 create table produtos_tb(
@@ -33,6 +36,15 @@ create table produtos_tb(
 alter table produtos_tb
     modify valor_prod decimal(5,2) not null;
 
+-- Insert na tabela de produtos
+insert into produtos_tb (codigo_produto, nome_prod, resumo_prod, valor_prod, descricao_prod, imagem_prod) values
+(26, 'coca-cola lata', 'refrigerante coca-cola lata.', '6.00', 'refrigerante em lata, sabor cola, coca-cola.', '59b444f78d6d117e85a1a6897680ed1f.jpeg'),
+(27, 'x salada', 'hambãºrguer, presunto, queijo, tomate, alface, maionese, ketchup e mostarda.', '21.00', 'suculento hambãºrguer artesanal, fatias de presunto, queijo, tomate cortado, folhas de alface, maionese artesanal, ketchup e mostarda.', '13c5261aca8e6317b86cd4e80e72db68.png'),
+(28, 'dogã£o daora', 'salsicha, bacon, vinagrete, maionese, keychup e mostarda.', '19.00', 'duas salsichas, fatias de bacon, vinagrete especial, maionese artesanal, keychup e mostarda.', '35c67c4cf5f4919886aef812be180670.jpeg'),
+(29, 'guaranã¡ dolly 350ml (lata)', 'refrigerante dolly guaranã¡.', '3.00', 'refrigerante sabor guaranã¡, dolly.', 'd4a832fb8760042835c8e33585b75a76.png'),
+(30, 'ãgua mineral (500ml)', 'ãgua mineral, garrafa 500ml sem gã¡s.', '4.00', 'ãgua mineral, garrafa 500ml sem gã¡s.', '3bddca391411808fb33f8f7c4b820c8c.jpeg'),
+(31, 'strogonoff da casa', 'carne bovina com molho de creme de leite, arroz branco e batata palha.', '37.00', 'iscas de filã© bovino com tradicional molho ã  base de creme de leite, servidas com arroz branco e batata palha.', 'c3bf4e870a2d441f709a2f1dfd4eede3.jpeg');
+
 -- Tabela pedidos
 create table pedidos_tb(
     id_pedido int(10) not null primary key auto_increment,
@@ -45,10 +57,12 @@ create table pedidos_tb(
     foreign key(cod_usuario) references usuarios_tb(codigo_usuario)
 );
 
-insert into pedidos_tb values (0,3,now(),null,'em preparacao');
-insert into pedidos_tb values (0,3,now(),null,'aguardando');
-insert into pedidos_tb values (0,3,now(),null,'entrega');
-insert into pedidos_tb values (0,3,now(),null,'pago');
+-- Insert na tabela de produtos
+insert into pedidos_tb (id_pedido, cod_usuario, data_pedido, data_fechamento, status_pedido) values
+(1, 2, '2019-01-31 00:00:00', '2019-03-05 11:02:16', 'pago'),
+(2, 2, '2019-02-27 00:00:00', null, 'aguardando'),
+(3, 4, '2019-03-01 13:56:48', null, 'em preparacao'),
+(4, 2, '2019-03-03 13:56:48', null, 'entrega');
 
 -- Tabela pedidos/produtos
 create table produtos_pedidos(
@@ -61,6 +75,18 @@ create table produtos_pedidos(
     foreign key(cod_pedido) references pedidos_tb(id_pedido),
     foreign key(cod_produto) references produtos_tb(codigo_produto)
 );
+
+-- Insert na tabela de produtos_pedidos
+insert into produtos_pedidos (id, cod_pedido, cod_produto, qtd_produto) values
+(1, 2, 26, 2),
+(2, 2, 27, 2),
+(3, 3, 28, 1),
+(4, 3, 26, 1),
+(5, 3, 30, 1),
+(9, 4, 31, 1),
+(10, 4, 30, 1),
+(11, 1, 26, 1),
+(12, 1, 28, 1);
 
 -- Tabela estado
 create table tb_estado(
