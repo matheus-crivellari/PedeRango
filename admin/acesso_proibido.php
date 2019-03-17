@@ -29,6 +29,7 @@
             <hr class="my-4">
             <p>Desculpe, você não tem permissão para acessar esta página.</p>
             <a class="btn btn-secondary" href="javascript:window.history.back()" role="button">Voltar</a>
+            <a class="btn btn-danger" href="logout.php" role="button">Sair</a>
         </div>
     </div>
 </body>
