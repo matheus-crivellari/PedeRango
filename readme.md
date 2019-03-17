@@ -23,15 +23,16 @@ O *webervice* é uma camada de *software* no lado do **servidor** que *fornece o
 * Usuários `>` Alterar;
 * Usuários `>` Excluir;
 * Restrição de acessos por tipo de usuário;
-* Verificação de username repetido;
+* Verificação de *username* repetido;
 
-### Aplicativo:
+### Aplicativo + *Webservice*:
 * Autenticação;
 * Auto-cadastro para usuários não cadastrados;
 * Produtos `>` Listar;
-* Pedidos `>` Alterar;
+* Pedidos `>` Listar;
 * Pedidos `>` Inserir;
 
-### Melhorias
-* Botão para deslogar do aplicativo
-* Tela para entregador mudar status dos pedidos
+### Melhorias para o *App*
+* Botão para deslogar do aplicativo;
+* Tela para entregador mudar status dos pedidos;
+* Filtro de pedidos fechados e abertos;
