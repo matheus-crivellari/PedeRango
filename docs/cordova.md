@@ -69,7 +69,7 @@ Permite que programadores construam aplicações para dispositivos móveis utili
         sudo npm i -g cordova
 
 ### *Windows*
-- TO-DO
+- TODO: Doc windows
 
 ---
 
@@ -93,6 +93,6 @@ Os passos à seguir são similares no *Linux* e no *Windows*. Antes de prossegui
 
         cordova requirements
 
-6.
+6. TODO: Doc de build android
 
 
