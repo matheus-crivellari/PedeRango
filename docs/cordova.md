@@ -4,7 +4,7 @@
 
 **Apache Cordova** é um *framework* para desenvolvimento de aplicativos *mobile*.
 
-Permite que programadores construam aplicações para dispositivos móveis utilizando ***CSS3***, ***HTML5***, e ***JavaScript*** ao invés de depender de linguagens específicas de cada plataforma (ex.: desenvolver *iOS* usando *Objective C* ou *Swift*).
+Permite que programadores construam aplicações para dispositivos móveis utilizando ***CSS3***, ***HTML5***, e ***JavaScript*** ao invés de depender de linguagens específicas para cada plataforma (ex.: desenvolver *iOS* usando *Objective C* ou *Swift*).
 
 ## Requisitos
 
@@ -16,7 +16,7 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 
 ## Instalação
 
-### Linux (*Ubuntu*)
+### *Linux* (*Ubuntu*)
 
 1. Instale o *Java*:
 
@@ -52,9 +52,9 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 
 8. Instale o SDK desejado para a versão correta de android:
 
-        sdkmanager "platform-tools" "platforms;android-<XX>"
+        sdkmanager "platform-tools" "platforms;android-23"
 
-   - <small>Substitua `<XX>` pelo [nível de API desejado](https://en.wikipedia.org/wiki/Android_version_history#Code_names);</small>
+   - <small>Substitua `23` pelo [nível de API desejado](https://en.wikipedia.org/wiki/Android_version_history#Code_names);</small>
 
 10. Instale o *NodeJS*:
 
@@ -67,3 +67,32 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 12. Instale o *Cordova* (global):
 
         sudo npm i -g cordova
+
+### *Windows*
+- TO-DO
+
+---
+
+## Criando um projeto *Cordova*
+
+Os passos à seguir são similares no *Linux* e no *Windows*. Antes de prosseguir crie uma pasta onde executará os próximos passos, como exemplo utilizaremos uma pasta chamada `meuapp`.
+
+1. Abra o Prompt de Comando/Terminal;
+2. Entre na pasta `meuapp`;
+3. Inicialize um novo projeto cordova:
+
+        cordova create .
+
+4. Adicione a plataforma android do [Nível de API desejado](https://cordova.apache.org/docs/en/latest/guide/platforms/android/#requirements-and-support):
+
+        cordova platform add android@8.0.0
+
+   - <small>Para este exemplo utilizaremos `android@8.0.0`, compatível com ***API 19*** (*KitKat*) ~ ***28*** (*Pie*);</small>
+
+5. Utilize o comando abaixo para verificar se todos os requisitos do cordova foram atendidos:
+
+        cordova requirements
+
+6.
+
+
