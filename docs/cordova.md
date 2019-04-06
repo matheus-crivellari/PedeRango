@@ -31,11 +31,11 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 
 <a name="instalacao"></a>
 
-## Instalação
+## Instalação <small><small>[[topo]](#topo)</small></small>
 
 <a name="linux"></a>
 
-### *Linux* (*Ubuntu*)
+### *Linux* (*Ubuntu*) <small><small>[[topo]](#topo)</small></small>
 
 1. Instale o *Java* a partir do **repositório oficial**:
 
