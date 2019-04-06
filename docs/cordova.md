@@ -88,8 +88,34 @@ Permite que programadores construam aplicações para dispositivos móveis utili
         sudo npm i -g cordova
         cordova -v
 
+---
+
 ### *Windows*
-- TODO: Doc windows
+1. Instale o [*Java*](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) do site oficial da **Oracle**;
+
+    - <small>*Visitado em* ***30/03/2019***.</small>;
+
+2. Instale o [*Android Studio*](https://developer.android.com/studio/install) do site oficial do **Android Developer**;
+
+3. Se necessário, baixe e descompacte o [*Android Tools*](https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip) no local correto;
+
+    - <small>Documentação em: https://developer.android.com/studio/command-line , *visualizada em* ***30/03/2019***.</small>;
+
+4. Instale o [*NodeJS*](https://nodejs.org/en/download/) do site oficial do NodeJS;
+
+    - <small>Dê preferência para a versão *LTS* (*Long Term Support*)</small>;
+    - <small>Atenção à versão do seu sistema operacional (*x86* ou *x64*)</small>;
+
+5. Abra uma instância do *cmd* com **permissões de administrador** e execute o seguinte comando:
+
+        node -v
+
+    - Se a versão instalada do `node` for exibida no console então a instalação está *ok*;
+
+6. Instale o *Cordova* (*globalmente*: `-g`):
+
+        npm i -g cordova
+        cordova -v
 
 ---
 
