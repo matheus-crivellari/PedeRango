@@ -18,55 +18,75 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 
 ### *Linux* (*Ubuntu*)
 
-1. Instale o *Java*:
+1. Instale o *Java* a partir do **repositório oficial**:
 
-        sudo apt install default-jre
 
-2. Instale o Android *SDK*:
+        sudo add-apt-repository ppa:webupd8team/java
+        sudo apt-get update
+        sudo apt-get install oracle-java8-installer
+        sudo apt install oracle-java8-set-default
+        java -version
 
-        sudo apt install android-sdk;
-        echo $ANDROID_HOME;
+2. Baixe e descompacte o *Android Tools* no local correto:
 
-3. Se o caminho da pasta não aparecer na variável `ANDROID_HOME`, configure-a manualmente da seguinte forma:
+    - <small>Documentação em: https://developer.android.com/studio/command-line , *visualizada em* ***30/03/2019***.</small>
 
-        cd /etc/profile.d # Navegue a até a pasta
-        sudo nano ~/.bashrc # Edite o arquivo .bashrc
+            cd ~
+            wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+            unzip sdk-tools-linux-4333796.zip .
+            mkdir android-sdk
+            mv tools android-sdk
 
-4. Dentro do arquivo cole as seguintes linhas:
+3. Modifique seu arquivo `.bashrc`:
 
-        export ANDROID_HOME="/usr/lib/android-sdk"
-        export PATH=$PATH:$ANDROID_HOME/tools/bin
-        export PATH=$PATH:$ANDROID_HOME/platform-tools
+        cd ~
+        sudo nano .bashrc
 
-5. Faça o download das ferramentas de *SDK*:
+    - E adicione as seguintes linhas:
 
-        wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+            export ANDROID_HOME=$HOME/android-sdk
+            export PATH=$PATH:$ANDROID_HOME/tools/bin
+            export PATH=$PATH:$ANDROID_HOME/platform-tools
+            export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
-   - <small>Documentação em: https://developer.android.com/studio/command-line#top_of_page , *visualizada em* ***30/03/2019***.</small>
+    - Em seguida recarregue o arquivo `.bashrc` para efetivar as modificações no *terminal*:
 
-6. Descompacte o arquivo usando o utilitário `unzip`:
+    - Utilize o comando `sdkmanager -- list` para verificar a funciondalidade do *SDK Manager*:
 
-        unzip sdk-tools-linux-4333796.zip
+            source ~/.bashrc
+            sdkmanager --list
 
-7. Substitua a pasta `/usr/lib/android-sdk/tools` pela nova pasta `tools` contida no `.zip` baixado no passo anterior;
+4. Instale o SDK desejado para a versão correta de android:
 
-8. Instale o SDK desejado para a versão correta de android:
+    - <small>Substitua `28` pelo [nível de API desejado](https://source.android.com/setup/start/build-numbers);</small>
 
-        sdkmanager "platform-tools" "platforms;android-23"
+            sdkmanager "platform-tools" "platforms;android-28"
+            sdkmanager "build-tools;28.0.3"
 
-   - <small>Substitua `23` pelo [nível de API desejado](https://en.wikipedia.org/wiki/Android_version_history#Code_names);</small>
+5. Verifique se o `curl` está instalado, se não estiver, isntale-o:
 
-10. Instale o *NodeJS*:
+        curl -v
+        sudo apt install curl
 
-        sudo apt install nodejs
+6. Instale o *Gradle* utilizando o **gerenciador de pacotes** do *Java*, **SDKMan**:
 
-11. Instale o *NPM*:
+        curl -s "https://get.sdkman.io" | bash
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
+        sdk version
+        sdk install gradle 5.3.1
+        gradle -v
 
-        sudo apt install npm
+7. Instlae o *NodeJS* a partir do **repositório oficial**:
 
-12. Instale o *Cordova* (global):
+        curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+        node -v
+        npm -v
+
+8. Instale o *Cordova* (*globalmente*: `-g`):
 
         sudo npm i -g cordova
+        cordova -v
 
 ### *Windows*
 - TODO: Doc windows
@@ -75,24 +95,24 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 
 ## Criando um projeto *Cordova*
 
-Os passos à seguir são similares no *Linux* e no *Windows*. Antes de prosseguir crie uma pasta onde executará os próximos passos, como exemplo utilizaremos uma pasta chamada `meuapp`.
+Os passos à seguir são similares no *Linux* e no *Windows*.
 
-1. Abra o Prompt de Comando/Terminal;
-2. Entre na pasta `meuapp`;
-3. Inicialize um novo projeto cordova:
+1. crie uma pasta onde executará os próximos passos, como exemplo utilizaremos uma pasta chamada `meuapp`:
 
+        cd ~/Documents
+        mkdir meuapp
+        cd meuapp
         cordova create .
 
-4. Adicione a plataforma android do [Nível de API desejado](https://cordova.apache.org/docs/en/latest/guide/platforms/android/#requirements-and-support):
+2. Adicione a plataforma desejada, conforme a [documentação](https://cordova.apache.org/docs/en/latest/guide/platforms/android/#requirements-and-support):
 
-        cordova platform add android@8.0.0
+    - <small>Para este exemplo utilizaremos `android@8.0.0`, compatível com ***API 19*** (*KitKat*) ~ ***28*** (*Pie*);</small>
 
-   - <small>Para este exemplo utilizaremos `android@8.0.0`, compatível com ***API 19*** (*KitKat*) ~ ***28*** (*Pie*);</small>
+            cordova platform add android@8.0.0
+            cordova requirements
 
-5. Utilize o comando abaixo para verificar se todos os requisitos do cordova foram atendidos:
+    - <small>Com o comando `cordova requirements` é possível verificar se todo os requisitos para compilar o app foram atendidos pelo sistema operacional;</small>
 
-        cordova requirements
+3. Faça o `build` do projeto, se este comando executar com sucesso, um novo apk do aplicativo será gerado:
 
-6. TODO: Doc de build android
-
-
+        cordova build android
