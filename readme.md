@@ -1,4 +1,4 @@
-# PedeRango.com
+# PedeRango.com 🌭
 
 ## Desenvolvimento *mobile* híbrido
 

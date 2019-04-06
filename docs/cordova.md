@@ -1,12 +1,27 @@
 # Utilizando o *Cordova* para *buildar* um *app* ***Android***
 
-## O que é Cordova?
+<a name="topo"></a>
+
+## Índice
+
+- [O que é Cordova?](#cordova)
+- [Requisitos](#requisitos)
+- [Instalação](#instalacao)
+  - [*Linux* (*Ubuntu*)](#linux)
+  - [*Windows*](#windows)
+- [Criando um projeto *Cordova*](#projeto)
+
+<a name="cordova"></a>
+
+## O que é Cordova? <small><small>[[topo]](#topo)</small></small>
 
 **Apache Cordova** é um *framework* para desenvolvimento de aplicativos *mobile*.
 
 Permite que programadores construam aplicações para dispositivos móveis utilizando ***CSS3***, ***HTML5***, e ***JavaScript*** ao invés de depender de linguagens específicas para cada plataforma (ex.: desenvolver *iOS* usando *Objective C* ou *Swift*).
 
-## Requisitos
+<a name="requisitos"></a>
+
+## Requisitos <small><small>[[topo]](#topo)</small></small>
 
 - ***JDK*** (*Kit* de Desenvolvimento *Java*);
 - **Android *SDK*** (*Kit* de Desenvolvimento *Android*);
@@ -14,7 +29,11 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 - ***NPM*** (Gerenciador de pacotes do *NodeJS*);
 - ***Cordova***;
 
+<a name="instalacao"></a>
+
 ## Instalação
+
+<a name="linux"></a>
 
 ### *Linux* (*Ubuntu*)
 
@@ -90,7 +109,9 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 
 ---
 
-### *Windows*
+<a name="windows"></a>
+
+### *Windows* <small><small>[[topo]](#topo)</small></small>
 1. Instale o [*Java*](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) do site oficial da **Oracle**;
 
     - <small>*Visitado em* ***30/03/2019***.</small>;
@@ -119,7 +140,9 @@ Permite que programadores construam aplicações para dispositivos móveis utili
 
 ---
 
-## Criando um projeto *Cordova*
+<a name="projeto"></a>
+
+## Criando um projeto *Cordova* <small><small>[[topo]](#topo)</small></small>
 
 Os passos à seguir são similares no *Linux* e no *Windows*.
 
