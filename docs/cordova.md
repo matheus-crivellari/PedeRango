@@ -82,7 +82,7 @@ Permite que programadores construam aplicações para dispositivos móveis utili
             sdkmanager "platform-tools" "platforms;android-28"
             sdkmanager "build-tools;28.0.3"
 
-5. Verifique se o `curl` está instalado, se não estiver, isntale-o:
+5. Verifique se o `curl` está instalado, se não estiver, instale-o:
 
         curl -v
         sudo apt install curl
