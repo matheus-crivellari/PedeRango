@@ -17,10 +17,10 @@ create table usuarios_tb(
 
 -- Insert na tabela de usuarios
 insert into usuarios_tb (codigo_usuario, username, nome_completo, endereco, estado_cod, cidade_cod, senha, tipo) values
-(1, 'admin', 'administrador usuã¡rio', 'rua nome da rua, 999 - bairro', 1, 80, '123', 'adm'),
-(2, 'joao', 'joã£o da silva', 'rua nome da rua, 999 - bairro', 26, 5141, '123', 'com'),
-(3, 'entregador', 'usuã¡rio entregador', 'rua nome da rua, 999 - bairro', 26, 4724, '123', 'ent'),
-(4, 'maria', 'maria da silva', 'rua nome da rua, 999 - bairro', 26, 5141, '123', 'com');
+(1, 'admin', 'Administrador Usuário', 'Rua Nome da Rua, 123 - Bairro', 1, 80, '123', 'adm'),
+(2, 'joao', 'João da Silva', 'Rua Nome da Rua, 456 - Bairro', 26, 5141, '123', 'com'),
+(3, 'entregador', 'Usuário Entregador', 'Rua Nome da Rua, 999 - Bairro', 26, 4724, '123', 'ent'),
+(4, 'maria', 'Maria da Silva', 'Rua Nome da Rua, 888 - Bairro', 26, 5141, '123', 'com');
 
 -- Tabela produtos
 create table produtos_tb(
@@ -38,12 +38,12 @@ alter table produtos_tb
 
 -- Insert na tabela de produtos
 insert into produtos_tb (codigo_produto, nome_prod, resumo_prod, valor_prod, descricao_prod, imagem_prod) values
-(26, 'coca-cola lata', 'refrigerante coca-cola lata.', '6.00', 'refrigerante em lata, sabor cola, coca-cola.', '59b444f78d6d117e85a1a6897680ed1f.jpeg'),
-(27, 'x salada', 'hambãºrguer, presunto, queijo, tomate, alface, maionese, ketchup e mostarda.', '21.00', 'suculento hambãºrguer artesanal, fatias de presunto, queijo, tomate cortado, folhas de alface, maionese artesanal, ketchup e mostarda.', '13c5261aca8e6317b86cd4e80e72db68.png'),
-(28, 'dogã£o daora', 'salsicha, bacon, vinagrete, maionese, keychup e mostarda.', '19.00', 'duas salsichas, fatias de bacon, vinagrete especial, maionese artesanal, keychup e mostarda.', '35c67c4cf5f4919886aef812be180670.jpeg'),
-(29, 'guaranã¡ dolly 350ml (lata)', 'refrigerante dolly guaranã¡.', '3.00', 'refrigerante sabor guaranã¡, dolly.', 'd4a832fb8760042835c8e33585b75a76.png'),
-(30, 'ãgua mineral (500ml)', 'ãgua mineral, garrafa 500ml sem gã¡s.', '4.00', 'ãgua mineral, garrafa 500ml sem gã¡s.', '3bddca391411808fb33f8f7c4b820c8c.jpeg'),
-(31, 'strogonoff da casa', 'carne bovina com molho de creme de leite, arroz branco e batata palha.', '37.00', 'iscas de filã© bovino com tradicional molho ã  base de creme de leite, servidas com arroz branco e batata palha.', 'c3bf4e870a2d441f709a2f1dfd4eede3.jpeg');
+(26, 'Coca-Cola Lata', 'Refrigerante coca-cola lata.', '6.00', 'Refrigerante em lata, sabor cola, Coca-Cola.', '59b444f78d6d117e85a1a6897680ed1f.jpeg'),
+(27, 'X Salada', 'Hambúrguer, presunto, queijo, tomate, alface, maionese, ketchup e mostarda.', '21.00', 'Suculento hambúrguer artesanal, fatias de presunto, queijo, tomate cortado, folhas de alface, maionese artesanal, ketchup e mostarda.', '13c5261aca8e6317b86cd4e80e72db68.png'),
+(28, 'Dogão Daora', 'Salsicha, bacon, vinagrete, maionese, ketchup e mostarda.', '19.00', 'Duas salsichas, fatias de bacon, vinagrete especial, maionese artesanal, ketchup e mostarda.', '35c67c4cf5f4919886aef812be180670.jpeg'),
+(29, 'Guaraná Dolly 350ml (Lata)', 'Refrigerante Dolly guaraná.', '3.00', 'Refrigerante sabor guaraná, Dolly.', 'd4a832fb8760042835c8e33585b75a76.png'),
+(30, 'Água Mineral (500ml)', 'Água mineral, garrafa 500ml sem gás.', '4.00', 'Água mineral, garrafa 500ml sem gás.', '3bddca391411808fb33f8f7c4b820c8c.jpeg'),
+(31, 'Strogonoff da Casa', 'Carne bovina com molho de creme de leite, arroz branco e batata palha.', '37.00', 'Iscas de filé bovino com tradicional molho à base de creme de leite, servidas com arroz branco e batata palha.', 'c3bf4e870a2d441f709a2f1dfd4eede3.jpeg');
 
 -- Tabela pedidos
 create table pedidos_tb(

@@ -10,7 +10,8 @@ if(mysqli_errno($conexao)){
     die(mysqli_error($conexao));
 }
 
+mysqli_set_charset($conexao, 'utf8');
+
 // Permite conexões ajax de qualquer origem
 // Essencial para o webservice do app mobile
 header('Access-Control-Allow-Origin: *');
-?>
